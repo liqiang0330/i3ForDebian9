@@ -23,7 +23,9 @@ function installCache() {
 }
 function installDevice() {
   #statements
-  case $1 in
+  echo -en "\033[33m Please select install option ("vir == VirtualBox ; Other == Your computer") :  \033[0m"
+  read option
+  case $option in
     vir )
     apt install linux-headers-$(uname -r|sed 's/[^-]*-[^-]*-//') linux-headers-$(uname -r|sed 's,[^-]*-[^-]*-,,') linux-image-$(uname -r|sed 's,[^-]*-[^-]*-,,')
     apt install xserver-xorg-input-evdev xserver-xorg-input-kbd xserver-xorg-input-mouse xserver-xorg-input-synaptics xserver-xorg-video-vesa xserver-xorg-video-vmware virtualbox-guest-x11 virtualbox-guest-utils
