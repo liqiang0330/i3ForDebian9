@@ -23,12 +23,12 @@ function installCache() {
 }
 function installDevice() {
   #statements
-  echo -en "\033[33m Please select install option ("vir == VirtualBox ; Other == Your computer") :  \033[0m"
+  echo -en "\033[33m Please select install option [vir == VirtualBox ; Other == Your computer] :  \033[0m"
   read option
   case $option in
     vir )
     apt install linux-headers-$(uname -r|sed 's/[^-]*-[^-]*-//') linux-headers-$(uname -r|sed 's,[^-]*-[^-]*-,,') linux-image-$(uname -r|sed 's,[^-]*-[^-]*-,,')
-    apt install xserver-xorg-input-evdev xserver-xorg-input-kbd xserver-xorg-input-mouse xserver-xorg-input-synaptics xserver-xorg-video-vesa xserver-xorg-video-vmware virtualbox-guest-x11 virtualbox-guest-utils
+    apt install xserver-xorg-input-evdev xserver-xorg-input-kbd xserver-xorg-input-mouse xserver-xorg-input-synaptics xserver-xorg-video-vesa xserver-xorg-video-vmware x11-xserver-utils x11-utils x11-xkb-utils virtualbox-guest-x11 virtualbox-guest-utils
     apt install apt install build-essential make perl
     mount /dev/sr0 /mnt/ && cd /mnt
     ./VBoxLinuxAdditions.run
@@ -50,7 +50,7 @@ function addUserToSudo() {
 }
 function openBashCompletion() {
   #statements
-cat <<BASH_COMPLETION | sudo tee /etc/bash.bashrc
+cat <<BASH_COMPLETION | sudo tee -a /etc/bash.bashrc
 # enable bash completion in interactive shells
 if ! shopt -oq posix; then
   if [ -f /usr/share/bash-completion/bash_completion ]; then
