@@ -28,8 +28,8 @@ function installDevice() {
   case $option in
     vir )
     apt install linux-headers-$(uname -r|sed 's/[^-]*-[^-]*-//') linux-headers-$(uname -r|sed 's,[^-]*-[^-]*-,,') linux-image-$(uname -r|sed 's,[^-]*-[^-]*-,,')
-    apt install xserver-xorg-input-evdev xserver-xorg-input-kbd xserver-xorg-input-mouse xserver-xorg-input-synaptics xserver-xorg-video-vesa xserver-xorg-video-vmware x11-xserver-utils x11-utils x11-xkb-utils virtualbox-guest-x11 virtualbox-guest-utils
-    apt install apt install build-essential make perl
+    apt install xserver-xorg-input-evdev xserver-xorg-input-kbd xserver-xorg-input-mouse xserver-xorg-input-synaptics xserver-xorg-video-vesa xserver-xorg-video-vmware x11-xserver-utils x11-utils x11-xkb-utils #virtualbox-guest-x11 virtualbox-guest-utils
+    apt install build-essential make perl
     mount /dev/sr0 /mnt/ && cd /mnt
     ./VBoxLinuxAdditions.run
       ;;
