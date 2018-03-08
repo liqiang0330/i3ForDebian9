@@ -52,7 +52,7 @@ function addUserToSudo() {
   echo -en "\033[33m Please input you create username :  \033[0m"
   read username
   # sed "20 a$username    ALL=(ALL:ALL) ALL" -i /etc/sudoers
-    sed -i "/root	ALL=(ALL:ALL) ALL/a$username	ALL=(ALL:ALL) ALL"
+    sed -i "/root	ALL=(ALL:ALL) ALL/a$username	ALL=(ALL:ALL) ALL" /etc/sudoers
 }
 
 function openBashCompletion() {
@@ -107,5 +107,5 @@ addUserToSudo
 openBashCompletion
 # 安装 X 环境 , 和一些驱动驱动
 installDevice
-# 清除临时目录
-rm -rf $workPath/.cache
+# 清除临时目录 ( 仅针对 root 用户执行时需要 )
+rm -rf $workPath
