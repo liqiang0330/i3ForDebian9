@@ -229,6 +229,9 @@ VIM_CONF
   cp -rf $workPath/.wallpaper.png $HOME
   # 移动头像到家目录
   cp -rf $workPath/.face $HOME
+  # 配置并加载 .Xresources
+  cp -rf $workPath/.Xresources $HOME
+  xrdb -merge $HOME/.Xresources
   # 移动音频文件到 Music
   cp -rf $workPath/stay.mp3 $HOME/Music
   # 移动 compton 配置文件到 ~/.config
@@ -255,6 +258,8 @@ VIM_CONF
   # 对于一些GUI程序无法弹出需要 gksudo的窗口,这或许会有用
   sudo sed -i '4 asession required pam_loginuid.so' /etc/pam.d/lightdm
   sudo sed -i '5 asession required pam_systemd.so' /etc/pam.d/lightdm
+  # 关闭终端 警告音
+  xset b off
 
 }
 
@@ -283,6 +288,6 @@ VIM_CONF
 # # 编译安装 Polybar
 # installPolybar
 # # 安装 MPD , NCMPCPP
-installMpdNcmpcpp
+# installMpdNcmpcpp
 # # 其他配置
-# someConfigure
+someConfigure
