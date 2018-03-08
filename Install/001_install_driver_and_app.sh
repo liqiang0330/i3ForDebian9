@@ -144,6 +144,24 @@ function installShadowsocksr() {
   cp -rf $workPath/ssconfig $HOME
 }
 
+function installI3Gaps() {
+  #statements
+  installCache
+  # 安装依赖
+  sudo apt -y install libxcb-keysyms1-dev libpango1.0-dev libxcb-util0-dev xcb libxcb1-dev libxcb-icccm4-dev libyajl-dev libev-dev libxcb-xkb-dev libxcb-cursor-dev libxkbcommon-dev libxcb-xinerama0-dev libxkbcommon-x11-dev libstartup-notification0-dev libxcb-randr0-dev libxcb-xrm0 libxcb-xrm-dev
+  cp -rf $workPath/i3-gaps $workPath/.cache
+  cd i3-gaps
+  # compile & install
+  autoreconf --force --install
+  rm -rf build/
+  mkdir -p build && cd build/
+  # Disabling sanitizers is important for release versions!
+  # The prefix and sysconfdir are, obviously, dependent on the distribution.
+  ../configure --prefix=/usr --sysconfdir=/etc --disable-sanitizers
+  make
+  sudo make install
+}
+
 function someConfigure() {
   #statements
   # vim 常用功能
@@ -205,6 +223,8 @@ VIM_CONF
 # # 编译安装 ProxyChains-ng
 # installProxyChains
 # # 安装并配置 Shadowsocksr-Python
-installShadowsocksr
+# installShadowsocksr
+# # 编译安装 i3Gaps
+installI3Gaps
 # # 其他配置
 # someConfigure
