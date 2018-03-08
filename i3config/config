@@ -1,0 +1,290 @@
+# i3 config file (v4)
+#
+# Please see http://i3wm.org/docs/userguide.html for a complete reference!
+
+# mod key
+# 设置Mod 键位
+set $mod Mod4
+
+# fonts
+# 设置字体
+# font pango: hack, Awesome 10
+font pango: 华文行楷 16, Font Awesome 5 Free Regular 14, Font Awesome 5 Free Solid 14, Font Awesome 5 Brands Regular 14, Material Icons:antialias 14
+
+# resolv i3 transparancy bug
+# 新窗口间隙
+new_window pixel
+
+# start a terminal
+# 启动一个新的终端
+# bindsym $mod+Return exec termite
+bindsym $mod+Return exec xfce4-terminal
+
+# start drofi dmenu
+# rofi 快捷键设置
+bindsym $mod+Tab exec --no-startup-id rofi -show window
+bindsym $mod+Shift+d exec --no-startup-id rofi -show run
+bindsym $mod+d exec --no-startup-id rofi -modi drun -show drun
+
+
+exec_always --no-startup-id $HOME/ssconfig/shadowsocks.sh s
+# SSR快捷键
+bindsym $Mod+F10 exec $HOME/ssconfig/shadowsocks.sh s
+bindsym $Mod+F11 exec $HOME/ssconfig/shadowsocks.sh e
+bindsym $Mod+F12 exec $HOME/ssconfig/shadowsocks.sh r
+
+#############################################################################################################################
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+# 使用Mod键+鼠标拖动浮动的窗口
+floating_modifier $mod
+
+# kill focused window
+# 结束当前窗口进程
+bindsym $mod+Shift+a kill
+
+# change focus
+# 设置切换窗口快捷键 j m 左右 l k 上下
+bindsym $mod+j focus left
+bindsym $mod+k focus down
+bindsym $mod+l focus up
+bindsym $mod+m focus right
+
+# alternatively, you can use the cursor keys:
+# 使用键盘预设方向键切换窗口
+# bindsym $mod+Left focus left
+# bindsym $mod+Down focus down
+# bindsym $mod+Up focus up
+# bindsym $mod+Right focus right
+
+# move focused window
+# 移动当前窗口在当前工作区中的位置
+bindsym $mod+Shift+j move left
+bindsym $mod+Shift+k move down
+bindsym $mod+Shift+l move up
+bindsym $mod+Shift+m move right
+
+# alternatively, you can use the cursor keys:
+# 跟上面一样
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# split in horizontal orientation
+# 下一个打开的窗口为水平方向
+bindsym $mod+h split h
+
+# split in vertical orientation
+# 下一个打开的窗口为垂直方向
+bindsym $mod+v split v
+
+# enter fullscreen mode for the focused container
+# 将当前窗口置为全屏
+bindsym $mod+f fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+# 改变当前窗口的布局方式
+# 其中s为垂直方向重叠
+# z为水平方向表格模式
+# e推出前两种布局方式，单独应用则为线性布局
+bindsym $mod+s layout stacking
+bindsym $mod+z layout tabbed
+bindsym $mod+e layout toggle split
+
+# toggle tiling / floating
+# 使当前窗口浮动
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+# 在一个窗口处于浮动状态时，切换到它之后的窗口
+bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+# 选中当前工作区中的所有窗口
+bindsym $mod+q focus parent
+
+# focus the child container
+#bindsym $mod+d focus child
+
+#scratchpad
+#显示和移动便签
+# bindsym $mod+twosuperior scratchpad show
+# bindsym $mod+Shift+twosuperior move scratchpad
+
+#Swith with same key to precedent workspace
+#用相同的键切换到先前的工作区
+workspace_auto_back_and_forth yes
+
+#############################################################################################################################
+
+# set workspace names
+# 设置工作区的名字
+set $tag1 "1:"
+set $tag2 "2:"
+set $tag3 "3:"
+set $tag4 "4:"
+set $tag5 "5:"
+set $tag6 "6:"
+set $tag7 "7:"
+set $tag8 "8:"
+set $tag9 "9:"
+set $tag10 "10:"
+
+# exec startup apps
+# exec --no-startup-id i3-msg 'exec thunderbird'
+# AutoStart 自动启动
+exec --no-startup-id feh --bg-fill ~/.wallpaper.png
+#exec --no-startup-id i3-msg 'exec geary'
+exec --no-startup-id i3-msg 'exec compton -b --config ~/.config/compton.conf'
+exec --no-startup-id i3-msg 'exec blueman-applet'
+exec --no-startup-id i3-msg 'exec nm-applet'
+exec --no-startup-id i3-msg 'exec mpd'
+exec --no-startup-id i3-msg 'exec xbindkeys'
+exec --no-startup-id i3-msg 'exec xfce4-power-manager'
+exec --no-startup-id i3-msg 'exec xfce4-volumed'
+# exec --no-startup-id i3-msg 'workspace $tag1; exec google-chrome-stable &'
+exec --no-startup-id i3-msg 'workspace $tag2; exec xfce4-terminal'
+# exec --no-startup-id i3-msg 'workspace $tag4; exec termite -e "screen -rd weechat &"; workspace $tag2'
+# exec --no-startup-id i3-msg 'workspace $tag10; exec termite -e "glances"; workspace $tag2'
+
+#colors
+#颜色
+#类                     边框    背景    文本颜色 指示符颜色  子边框
+# class                 border  backgr. text    indicator child_border
+client.focused          #FFFFFF #FFFFFF #000000 #000000   #000000
+client.focused_inactive #333333 #5f676a #ffffff #484e50   #000000
+client.unfocused        #333333 #222222 #888888 #292d2e   #222222
+client.urgent           #2f343a #900000 #ffffff #900000   #900000
+client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
+
+#i3-gaps
+#i3-gaps的一些设置
+for_window [class="^.*"] border pixel 0
+gaps inner 8
+gaps outer 0
+# smart_gaps on
+smart_borders on
+
+#############################################################################################################################
+
+#rofi_power menu
+#rofi 电源按钮
+bindsym $mod+Shift+q exec ~/.config/i3/rofi_powermenu.sh
+
+#lightdm-webkit2 锁定屏幕
+bindsym $mod+Control+l exec dm-tool lock
+#i3lock 锁定屏幕
+bindsym $mod+Control+c exec $HOME/.config/i3/i3lock-fancy-multimonitor/lock
+
+# 文件管理器
+bindsym $mod+Control+e exec thunar
+
+# by class
+## floatings
+# 指定软件默认以浮动状态打开
+# for_window [class="Cssh"] floating enable, border normal
+for_window [class="vim"] floating enable, border normal
+# for_window [class="XTerm"] floating enable, border normal
+for_window [class="feh"] floating enable, border normal
+for_window [class="Telegram-Desktop"] floating enable, border normal
+
+# assigns focus
+# 给工作区分配图标/焦点？
+assign [class="Thunderbird"] $tag3
+
+assign [class="Lollypop"] $tag5
+for_window [class="Lollypop"] focus
+
+assign [class="Code"] $tag6
+for_window [class="Code"] focus
+
+assign [class="WebTorrent"] $tag7
+for_window [class="WebTorrent"] focus
+
+assign [class="Ncmpcpp"] $tag9
+for_window [class="Ncmpcpp"] focus
+
+# assign [class="Ncmpcpp"] $tag10
+# for_window [class="Ncmpcpp"] focus
+
+#toggle workspace's display screen
+#切换工作区的显示屏幕
+bindsym $mod+less move workspace to output right
+bindsym $mod+Shift+less move workspace to output up
+
+
+#assign workspace to screens
+#给工作区分配屏幕
+workspace $tag1 output LVDS-1
+# workspace $tag2 output HDMI-1
+# workspace $tag3 output eDP-1
+# workspace $tag4 output eDP-1
+# workspace $tag5 output eDP-1
+# workspace $tag6 output eDP-1
+# workspace $tag7 output eDP-1
+# workspace $tag8 output eDP-1
+# workspace $tag9 output eDP-1
+# workspace $tag10 output eDP-1
+
+###################################################################################
+
+# switch to workspace
+# 切换到工作区
+bindsym $mod+1 workspace $tag1
+bindsym $mod+2 workspace $tag2
+bindsym $mod+3 workspace $tag3
+bindsym $mod+4 workspace $tag4
+bindsym $mod+5 workspace $tag5
+bindsym $mod+6 workspace $tag6
+bindsym $mod+7 workspace $tag7
+bindsym $mod+8 workspace $tag8
+bindsym $mod+9 workspace $tag9
+bindsym $mod+0 workspace $tag10
+
+# move focused container to workspace
+# 移动当前焦点窗口到其他工作区
+bindsym $mod+Shift+1 move container to workspace $tag1
+bindsym $mod+Shift+2 move container to workspace $tag2
+bindsym $mod+Shift+3 move container to workspace $tag3
+bindsym $mod+Shift+4 move container to workspace $tag4
+bindsym $mod+Shift+5 move container to workspace $tag5
+bindsym $mod+Shift+6 move container to workspace $tag6
+bindsym $mod+Shift+7 move container to workspace $tag7
+bindsym $mod+Shift+8 move container to workspace $tag8
+bindsym $mod+Shift+9 move container to workspace $tag9
+bindsym $mod+Shift+0 move container to workspace $tag10
+
+# reload the configuration file
+# 重新加载配置文件
+bindsym $mod+Shift+c reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+# 重新启动i3，一般发生在i3升级之后
+bindsym $mod+Shift+r restart
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+
+# resize window (you can also use the mouse for that)
+# 重设窗口大小
+mode "resize" {
+        bindsym j resize shrink width 10 px or 10 ppt
+        bindsym k resize grow height 10 px or 10 ppt
+        bindsym l resize shrink height 10 px or 10 ppt
+        bindsym m resize grow width 10 px or 10 ppt
+
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        # back to normal: Enter or Escape
+        # 返回恢复正常
+        # 回车或者空格键重设窗口大小
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+# 使用mod+r 重设窗口大小
+bindsym $mod+r mode "resize"
+
+# 随i3启动而启动polybar
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh

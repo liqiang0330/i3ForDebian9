@@ -162,6 +162,19 @@ function installI3Gaps() {
   sudo make install
 }
 
+function installPolybar() {
+  #statements
+  installCache
+  # 安装 依赖
+  sudo apt -y install cmake cmake-data libcairo2-dev libxcb1-dev libxcb-ewmh-dev libxcb-icccm4-dev libxcb-image0-dev libxcb-randr0-dev libxcb-util0-dev libxcb-xkb-dev pkg-config python-xcbgen xcb-proto libxcb-xrm-dev i3-wm libjsoncpp-dev libasound2-dev libpulse-dev libmpdclient-dev libiw-dev libcurl4-openssl-dev libxcb-cursor-dev
+  cp -rf $workPath/polybar $workPath/.cache
+  mkdir polybar/build
+  cd polybar/build
+  cmake ..
+  sudo make install
+  make userconfig
+}
+
 function someConfigure() {
   #statements
   # vim 常用功能
@@ -194,12 +207,21 @@ VIM_CONF
   cp -rf $workPath/stay.mp3 $HOME/Music
   # 移动 compton 配置文件到 ~/.config
   cp -rf $workPath/compton/compton.conf $HOME/.config/
-  # 添加 xbindkeys 配置文件
+  # 添加并配置 xbindkeys 配置文件
   cp -rf $workPath/.xbindkeysrc $HOME
-  # 添加 xfce4 terminal 和 thunar 等配置
+  # 添加并配置 xfce4 terminal 和 thunar 等配置
   cp -rf $workPath/xfce4 $HOME/.config
-  # 添加通知主题配置文件
+  # 添加并配置通知主题配置文件
   cp -rf $workPath/xfce4-notifyd-theme.rc $HOME/.cache
+  # 添加并配置 i3 配置文件
+  mv $HOME/.config/i3/config $HOME/.config/i3/config.bak
+  cp -rf $workPath/i3config/* $HOME/.config/i3/
+  # 添加并配置 Polybar 配置文件
+  cp -rf $workPath/polybarconf/* $HOME/.config/polybar/
+  # 添加并配置 GTK 主题配置
+  cp -rf $workPath/gtk-2.0 $HOME/.config
+  cp -rf $workPath/gtk-3.0 $HOME/.config
+  cp -rf $workPath/.gtkrc-2.0 $HOME
   # 对于一些GUI程序无法弹出需要 gksudo的窗口,这或许会有用
   sudo sed -i '4 asession required pam_loginuid.so' /etc/pam.d/lightdm
   sudo sed -i '5 asession required pam_systemd.so' /etc/pam.d/lightdm
@@ -225,6 +247,8 @@ VIM_CONF
 # # 安装并配置 Shadowsocksr-Python
 # installShadowsocksr
 # # 编译安装 i3Gaps
-installI3Gaps
+# installI3Gaps
+# # 编译安装 Polybar
+installPolybar
 # # 其他配置
 # someConfigure

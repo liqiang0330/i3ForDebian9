@@ -1,0 +1,447 @@
+;=====================================================
+;
+;   To learn more about how to configure Polybar
+;   go to https://github.com/jaagr/polybar
+;
+;   The README contains alot of information
+;
+;=====================================================
+
+;颜色设置
+[colors]
+background = #ab07080D
+background-alt = #444
+foreground = #dfdfdf
+foreground-alt = #55
+primary = #ffb52a
+secondary = #e60053
+alert = #bd2c40
+accent = #81a1c1
+
+;全局设置
+[global/wm]
+margin-top = 50
+margin-bottom = 50
+
+[settings]
+throttle-output = 5
+throttle-output-for = 10
+throttle-input-for = 30
+screenchange-reload = true
+
+;顶部Bar
+[bar/top]
+monitor = ${env:MONITOR}
+monitor-strict = true
+dpi = 96
+bottom = false
+width = 100%
+height = 25
+radius = 6.0
+
+;background = ${xrdb:color9}
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+overline-size = 0
+overline-color = #f00
+underline-size = 2
+underline-color = #00f
+
+line-size = 2
+line-color = #f00
+border-size = 4
+border-color = #00000000
+padding-left = 0
+padding-right = 2
+module-margin-left = 1
+module-margin-right = 2
+
+;spacing = 1
+
+;字体设置
+font-0 = 华文行楷:pixelsize=12;2
+;font-1 = unifont:size=10;2
+font-1 = Font Awesome 5 Free Regular:pixelsize=14;2
+font-2 = Font Awesome 5 Free Solid:pixelsize=14;2
+font-3 = Font Awesome 5 Brands Regular:pixelsize=14;2
+;font-4 = FontAwesome:pixelsize=14;2
+font-4 = "Material Icons:antialias=false:size=16;4"
+font-5 = siji:pixelsize=14;2
+
+
+;顶部Bar模块显示布局
+modules-left = i3
+modules-center =
+modules-right = backlight volume wlan networkspeedup networkspeeddown battery date powermenu
+;modules-right = backlight volume wlan battery date powermenu eth
+
+;底部Bar
+[bar/bottom]
+monitor = ${env:MONITOR}
+monitor-strict = true
+dpi = 96
+bottom = true
+width = 100%
+height = 25
+radius = 6.0
+
+;override-redirect = true
+;wm-restack = i3
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+overline-size = 0
+overline-color = #f00
+underline-size = 2
+underline-color = #00f
+
+line-size = 2
+line-color = #f00
+border-size = 4
+border-color = #00000000
+padding-left = 2
+padding-right = 2
+module-margin-left = 1
+module-margin-right = 2
+
+;加载系统托盘
+;当你更改壁纸的时候,可能由于壁纸色调的原因出现下面的问题
+;关于系统托盘透明没有解决,可以使用取色器取(已经随脚本安装gcolor)一下底部polybar右边离托盘比较近的地方的颜色,设置一下,让托盘背景不那么违和
+tray-position = right
+tray-padding = 2
+
+tray-background = #11141D
+;tray-detached = true
+;tray-transparent = true
+
+;字体
+font-0 = 华文行楷:pixelsize=12;2
+;font-1 = unifont:size=10;2
+font-1 = Font Awesome 5 Free Regular:pixelsize=14;2
+font-2 = Font Awesome 5 Free Solid:pixelsize=14;2
+font-3 = Font Awesome 5 Brands Regular:pixelsize=14;2
+;font-4 = FontAwesome:pixelsize=14;2
+font-4 = "Material Icons:antialias=false:size=16;4"
+font-5 = siji:pixelsize=14;2
+
+;底部Bar模块显示布局
+modules-left = mpd xwindow
+modules-center =
+modules-right = xkeyboard temperature filesystem-slash filesystem-home cpu memory
+
+;程序运行Bar
+[module/xwindow]
+type = internal/xwindow
+label = "   %{F#81a1c1}--%{F-} %title:0:60:...%%{F#81a1c1}--"
+
+[module/xkeyboard]
+type = internal/xkeyboard
+blacklist-0 = num lock
+
+format-underline = ${colors.secondary}
+;format-prefix = " "
+format-prefix-foreground = ${colors.foreground-alt}
+
+label-layout = %layout%
+
+label-indicator-padding = 2
+label-indicator-background = ${colors.secondary}
+label-indicator-underline = ${colors.secondary}
+
+;家目录分区使用率
+[module/filesystem-home]
+type = internal/fs
+interval = 25
+
+mount-0 = /home
+label-mounted = "%{F#F44336}%{F-} %percentage_used%%"
+label-mounted-underline= #F44336
+
+;根目录分区使用率
+[module/filesystem-slash]
+type = internal/fs
+interval = 25
+
+mount-0 = /
+label-mounted = "%{F#26A69A}%{F-} %percentage_used%%"
+label-mounted-underline= #26A69A
+
+;label-unmounted = %mountpoint%: not mounted
+;label-unmounted-foreground = ${colors.foreground-alt}
+
+[module/bspwm]
+type = internal/bspwm
+ws-icon-default = x
+
+label-focused = %index%
+label-focused-background = #004D40
+;label-focused-underline= ${colors.primary}
+label-focused-underline= #009688
+label-focused-padding = 2
+
+label-occupied = %index%
+label-occupied-padding = 2
+
+label-urgent = %index%!
+label-urgent-background = ${colors.alert}
+label-urgent-padding = 2
+
+label-empty = %index%
+label-empty-foreground = ${colors.foreground-alt}
+label-empty-padding = 2
+
+;i3工作区
+[module/i3]
+type = internal/i3
+format = <label-state> <label-mode>
+index-sort = true
+wrapping-scroll = false
+strip-wsnumbers = true
+pin-workspaces = true
+
+label-mode-padding = 2
+label-mode-foreground = #000
+label-mode-background = ${colors.primary}
+
+label-focused = %name%
+label-focused-background = ${module/bspwm.label-focused-background}
+label-focused-underline = ${module/bspwm.label-focused-underline}
+label-focused-padding = ${module/bspwm.label-focused-padding}
+
+label-unfocused = %name%
+label-unfocused-padding = ${module/bspwm.label-occupied-padding}
+
+label-urgent = %name%!
+label-urgent-background = ${module/bspwm.label-urgent-background}
+label-urgent-padding = ${module/bspwm.label-urgent-padding}
+
+label-visible = %name%
+label-visible-background = ${self.label-focused-background}
+label-visible-underline = ${self.label-focused-underline}
+label-visible-padding = ${self.label-focused-padding}
+
+ws-icon-0 = 1;
+ws-icon-1 = 2;
+ws-icon-2 = 3;
+ws-icon-3 = 4;
+ws-icon-4 = 5;
+ws-icon-5 = 6;
+ws-icon-6 = 7;
+ws-icon-7 = 8;
+ws-icon-8 = 9;
+ws-icon-9 = 10;
+
+;MPD模块
+[module/mpd]
+type = internal/mpd
+interval = 1
+format-online = " <icon-prev> <icon-stop> <toggle> <icon-next>  <icon-repeat> <icon-random>  <label-song>  <bar-progress>"
+
+label-song-maxlen = 40
+label-song-ellipsis = true
+label-offline = offline
+
+icon-prev = %{F#5b}%{F-}
+icon-seekb = %{F#5b}%{F-}
+icon-stop = %{F#5b}%{F-}
+icon-play = %{F#5b}%{F-}
+icon-pause = %{F#5b}%{F-}
+icon-next = %{F#5b}%{F-}
+icon-seekf = %{F#5b}%{F-}
+
+icon-random = 
+icon-repeat = 
+
+toggle-on-foreground = ${colors.primary}
+toggle-off-foreground = #66
+
+bar-progress-width = 10
+bar-progress-indicator = |
+bar-progress-fill = ─
+bar-progress-empty = ─
+;亮度
+[module/backlight]
+type = internal/backlight
+card = intel_backlight
+
+format = <label> <bar>
+label = ""
+label-foreground = ${colors.accent}
+bar-width = 10
+bar-indicator = |
+bar-indicator-foreground = #ff
+bar-indicator-font = 2
+bar-fill = ─
+bar-fill-font = 2
+bar-fill-foreground = #9f78e1
+bar-empty = ─
+bar-empty-font = 2
+bar-empty-foreground = ${colors.foreground-alt}
+
+;CPU运行频率
+[module/cpu]
+type = internal/cpu
+interval = 1
+format-prefix = " "
+format-prefix-foreground = ${colors.primary}
+format-underline = ${colors.primary}
+label = %percentage%%
+
+;内存
+[module/memory]
+type = internal/memory
+interval = 2
+format-prefix = " "
+format-prefix-foreground = ${colors.secondary}
+format-underline = ${colors.secondary}
+label = %percentage_used%%
+
+;无线网卡
+[module/wlan]
+type = internal/network
+interface = wlp2s0
+interval = 15
+
+format-connected = <label-connected>
+format-connected-prefix = " "
+format-connected-prefix-foreground = ${colors.accent}
+
+;format-connected-underline = #9f78e1
+;format-disconnected-underline = ${self.format-connected-underline}
+
+;label-connected = %essid%
+label-connected = %essid%
+format-disconnected = <label-disconnected>
+label-disconnected =   Disconnected
+label-disconnected-foreground = ${colors.foreground-alt}
+
+ramp-signal-0 = 
+ramp-signal-1 =  
+ramp-signal-2 =  
+ramp-signal-3 =  
+ramp-signal-4 =  
+ramp-signal-5 =  
+ramp-signal-foreground = ${colors.foreground-alt}
+;有线网卡
+[module/eth]
+type = internal/network
+interface = enp3s0
+interval = 3.0
+
+format-connected-underline = #55aa55
+format-connected-prefix = " "
+format-connected-foreground-foreground = ${colors.foreground-alt}
+label-connected = %local_ip%
+
+format-disconnected-underline = ${self.format-connected-underline}
+label-disconnected = %ifname%
+label-disconnected-foreground = ${colors.foreground-alt}
+;上行
+[module/networkspeedup]
+type = internal/network
+interface = wlp2s0
+interval = 1
+label-connected = "%upspeed:7%"
+format-connected = <label-connected>
+format-connected-prefix = ""
+format-connected-prefix-foreground = 	#B0E0E6
+;下行
+[module/networkspeeddown]
+type = internal/network
+interval = 1
+interface = wlp2s0
+label-connected = "%downspeed:7%"
+format-connected = <label-connected>
+format-connected-prefix = ""
+format-connected-prefix-foreground = #B0E0E6
+
+;日期,时间
+[module/date]
+type = internal/date
+interval = 1
+
+date = "%{F#777} %{F#5F9EA0}%d%{F#777} "
+date-alt = "%{F#5F9EA0}%d %m %Y --"
+time = "%{F#5F9EA0}%H%{F#92}:%M%{F-}%{F#49}:%S%{F-}"
+time-alt =  %H:%M:%S
+format-prefix-foreground = ${colors.foreground-alt}
+label = %date% %time%
+
+;音量
+[module/volume]
+type = internal/volume
+
+format-volume = <label-volume> <bar-volume>
+label-volume = " "
+label-volume-foreground = ${colors.accent}
+format-muted-prefix = " "
+format-muted-foreground = ${colors.foreground-alt}
+label-muted = muted
+
+bar-volume-width = 10
+bar-volume-foreground-0 = #5af78e
+bar-volume-foreground-1 = #5af78e
+bar-volume-foreground-2 = #5af78e
+bar-volume-foreground-3 = #5af78e
+bar-volume-foreground-4 = #5af78e
+bar-volume-foreground-5 = #f3f99d
+bar-volume-foreground-6 = #ff5c57
+bar-volume-gradient = false
+bar-volume-indicator = │
+bar-volume-indicator-font = 2
+bar-volume-indicator-foreground = #ff
+bar-volume-fill = ─
+bar-volume-fill-font = 2
+bar-volume-empty = ─
+bar-volume-empty-font = 2
+bar-volume-empty-foreground = ${colors.foreground-alt}
+
+;电池
+[module/battery]
+type = internal/battery
+battery = BAT0
+adapter = AC
+full-at = 98
+poll-interval = 60
+format-charging = <ramp-capacity>  <label-charging>
+label-charging =  %percentage%%
+label-charging-foreground = #9f78e1
+label-full = Full
+label-full-foreground = #5af78e
+format-discharging = <ramp-capacity>  <label-discharging>
+label-discharging = %percentage%%
+ramp-capacity-0 = 
+ramp-capacity-1 = 
+ramp-capacity-2 = 
+ramp-capacity-3 = 
+ramp-capacity-4 = 
+ramp-capacity-foreground = ${colors.accent}
+
+;温度
+[module/temperature]
+type = internal/temperature
+interval = 1
+thermal-zone = 0
+warn-temperature = 60
+; 找到所需文件
+hwmon-path = /sys/devices/platform/coretemp.0/hwmon/hwmon2/temp1_input
+format = <ramp> <label>
+format-warn = <ramp> <label-warn>
+label = %temperature%
+label-underline = #00E676
+label-warn = %temperature%
+label-warn-foreground = ${colors.secondary}
+label-warn-underline = ${colors.secondary}
+ramp-0 = 
+ramp-1 = 
+ramp-2 = 
+ramp-foreground = #6D4C41
+ramp-underline = #6D4C41
+
+;自定义电源按钮
+[module/powermenu]
+type = custom/menu
+label-open = "%{A1:~/.config/i3/rofi_powermenu.sh:}%{A}"
+label-open-foreground = #ff5c56
+; vim:ft=dosini
