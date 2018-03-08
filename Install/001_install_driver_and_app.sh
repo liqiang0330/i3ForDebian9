@@ -25,7 +25,7 @@ function installCache() {
 function installApplications() {
   #statements
   sudo apt -y update
-  sudo apt -y install lightdm i3 git vim neofetch feh resolvconf fonts-wqy-zenhei lxappearance gdebi qt4-qtconfig compton curl wget ranger volumeicon-alsa pulseaudio pavucontrol fonts-arphic-uming arandr xdg-utils wpasupplicant wpagui htop p7zip-full xfce4-terminal xfce4-notifyd zsh xfce4-power-manager* thunar breeze-cursor-theme file-roller pulseaudio-module-bluetooth blueman rofi xbindkeys zsh-syntax-highlighting scrot imagemagick zathura*
+  sudo apt -y install lightdm i3 git vim neofetch feh resolvconf fonts-wqy-zenhei lxappearance gdebi qt4-qtconfig compton curl wget ranger volumeicon-alsa pulseaudio pavucontrol fonts-arphic-uming arandr xdg-utils wpasupplicant wpagui htop p7zip-full xfce4-terminal xfce4-notifyd zsh xfce4-power-manager* thunar breeze-cursor-theme file-roller pulseaudio-module-bluetooth blueman rofi xbindkeys zsh-syntax-highlighting scrot imagemagick zathura* notify-osd
 }
 
 function someNeedsApplications() {
@@ -158,6 +158,8 @@ VIM_CONF
   cp -rf $workPath/.xbindkeysrc $HOME
   # 添加 xfce4 terminal 和 thunar 等配置
   cp -rf $workPath/xfce4 $HOME/.config
+  # 添加通知主题配置文件
+  cp -rf $workPath/xfce4-notifyd-theme.rc $HOME/.cache
   # 对于一些GUI程序无法弹出需要 gksudo的窗口,这或许会有用
   sudo sed -i '4 asession required pam_loginuid.so' /etc/pam.d/lightdm
   sudo sed -i '5 asession required pam_systemd.so' /etc/pam.d/lightdm
