@@ -25,7 +25,7 @@ function installCache() {
 function installApplications() {
   #statements
   sudo apt -y update
-  sudo apt -y install lightdm i3 git vim neofetch feh resolvconf fonts-wqy-zenhei lxappearance gdebi qt4-qtconfig compton curl wget ranger volumeicon-alsa pulseaudio pavucontrol fonts-arphic-uming arandr xdg-utils wpasupplicant wpagui htop p7zip-full xfce4-terminal xfce4-notifyd zsh xfce4-power-manager* thunar breeze-cursor-theme file-roller pulseaudio-module-bluetooth blueman rofi xbindkeys zsh-syntax-highlighting scrot imagemagick zathura* notify-osd
+  sudo apt -y install lightdm i3 git vim neofetch feh resolvconf fonts-wqy-zenhei lxappearance gdebi qt4-qtconfig compton curl wget ranger volumeicon-alsa pulseaudio pavucontrol fonts-arphic-uming arandr xdg-utils wpasupplicant wpagui htop p7zip-full xfce4-terminal xfce4-notifyd zsh xfce4-power-manager* thunar breeze-cursor-theme file-roller pulseaudio-module-bluetooth blueman rofi xbindkeys zsh-syntax-highlighting scrot imagemagick zathura* notify-osd tk
 }
 
 function someNeedsApplications() {
@@ -136,6 +136,14 @@ function installProxyChains() {
   sudo sed -i 's/socks4 	127.0.0.1 9050/socks5  127.0.0.1 1088/g' /etc/proxychains.conf
 }
 
+function installShadowsocksr() {
+  #statements
+  sudo apt install libsodium23
+  cp -rf $workPath/shadowsocksr $HOME
+  # 请自行添加名为 config.json 的配置文件到 ~/ssconfig目录中
+  cp -rf $workPath/ssconfig $HOME
+}
+
 function someConfigure() {
   #statements
   # vim 常用功能
@@ -180,21 +188,23 @@ VIM_CONF
 
 }
 
-# 安装需要的软件
-installApplications
-# 安装其他需要的软件
-someNeedsApplications
-# 安装 LightdmWebKit2 和 主题
-installLightdmWebKit2
-# 安装 Grub2 主题
-installGrub2Themes
-# 安装 OhMyZsh
-installOhMyZsh
-# 配置DNS
-configDNS
-# 安装字体
-installFonts
-# 编译安装 ProxyChains-ng
-installProxyChains
-# 其他配置
-someConfigure
+# # 安装需要的软件
+# installApplications
+# # 安装其他需要的软件
+# someNeedsApplications
+# # 安装 LightdmWebKit2 和 主题
+# installLightdmWebKit2
+# # 安装 Grub2 主题
+# installGrub2Themes
+# # 安装 OhMyZsh
+# installOhMyZsh
+# # 配置DNS
+# configDNS
+# # 安装字体
+# installFonts
+# # 编译安装 ProxyChains-ng
+# installProxyChains
+# # 安装并配置 Shadowsocksr-Python
+installShadowsocksr
+# # 其他配置
+# someConfigure
