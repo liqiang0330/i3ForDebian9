@@ -156,6 +156,8 @@ VIM_CONF
   cp -rf $workPath/compton/compton.conf $HOME/.config/
   # 添加 xbindkeys 配置文件
   cp -rf $workPath/.xbindkeysrc $HOME
+  # 添加 xfce4 terminal 和 thunar 等配置
+  cp -rf $workPath/xfce4 $HOME/.config
   # 对于一些GUI程序无法弹出需要 gksudo的窗口,这或许会有用
   sudo sed -i '4 asession required pam_loginuid.so' /etc/pam.d/lightdm
   sudo sed -i '5 asession required pam_systemd.so' /etc/pam.d/lightdm

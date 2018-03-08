@@ -1,0 +1,88 @@
+[Configuration]
+# 字体名称
+FontName=Meslo LG M DZ for Powerline Regular 12
+# 允许粗体字
+FontAllowBold=TRUE
+# TRUE即使只有一个终端选项卡打开，如果选项卡标题将始终显示。如果您不想在打开第二个选项卡时调整终端窗口的大小，则此选项非常有用。它默认是禁用的。
+MiscAlwaysShowTabs=FALSE
+# 终端响铃?
+MiscBell=TRUE
+# 在新窗口周围显示边框
+MiscBordersDefault=FALSE
+# 启用此选项可显示闪烁的光标。可以是TRUE或者FALSE
+MiscCursorBlinks=TRUE
+# 指定终端中光标的形状。这可以是TERMINAL_CURSOR_SHAPE_BLOCK（默认）TERMINAL_CURSOR_SHAPE_IBEAM或TERMINAL_CURSOR_SHAPE_UNDERLINE。此选项仅在您针对VTE 0.19.1或更高版本进行编译时才可用
+MiscCursorShape=TERMINAL_CURSOR_SHAPE_UNDERLINE
+# 窗口默认打开 列 行
+MiscDefaultGeometry=80x24
+# 此设置控制新窗口是否从其父窗口（打开新窗口的窗口）继承几何活动选项卡的宽度和高度
+MiscInheritGeometry=FALSE
+# 是否在新窗口中显示菜单栏
+MiscMenubarDefault=FALSE
+# 此设置控制终端在终端窗口中输入时是否隐藏鼠标光标
+MiscMouseAutohide=FALSE
+# 是否在新窗口打开工具栏
+MiscToolbarDefault=FALSE
+# 控制终端在用户尝试关闭具有多个选项卡的终端窗口时弹出确认对话框。可以是TRUE（默认）或FALSE。
+MiscConfirmClose=TRUE
+# 该选项控制您是否可以通过终端选项卡进行循环。也就是说，无论您是使用Go菜单中的Next Tab按钮（或关联的快捷键），还是从第一个标签到最后一个标签，都可以使用从上一个标签页到第一个标签页的上一个标签页按钮去菜单
+MiscCycleTabs=TRUE
+# 此设置控制终端是否提供带终端选项卡标题的关闭按钮
+MiscTabCloseButtons=TRUE
+# 此设置控制终端在用户中间点击标签标题时是否关闭终端选项卡
+MiscTabCloseMiddleClick=TRUE
+# 指定选项卡标题的显示位置
+MiscTabPosition=GTK_POS_TOP
+# 此设置控制是否在终端窗口中显示的文本中突出显示URL（包括超链接和电子邮件地址）
+MiscHighlightUrls=TRUE
+
+MiscScrollAlternateScreen=TRUE
+
+# 文字颜色
+ColorForeground=#1ABC9C
+# 不使用默认粗体字颜色
+ColorBoldUseDefault=TRUE
+# 粗体字颜色
+ColorBold=#ffffffffffff
+# 不使用默认文字选择区域颜色
+ColorSelectionUseDefault=TRUE
+# 是否启用每个标签使用不同的背景色
+ColorBackgroundVary=TRUE
+# 标签活动颜色
+TabActivityColor=#aaaa00000ef8
+# 背景色
+ColorBackground=#282A36
+# 光标颜色
+ColorCursor=#FF4655
+# 调色板 从左至右 1-16
+ColorPalette=#2c3e50;#c0392b;#27ae60;#f39c12;#2980b9;#8e44ad;#16a085;#bdc3c7;#34495e;#e74c3c;#2ecc71;#f1c40f;#3498db;#9b59b6;#2AA198;#ecf0f1
+# 向上滚动10000行
+ScrollingLines=10000
+# 滚动条显示位置 , 当前为禁用
+ScrollingBar=TERMINAL_SCROLLBAR_NONE
+# 使用透明背景
+BackgroundMode=TERMINAL_BACKGROUND_TRANSPARENT
+# 背景透明度
+BackgroundDarkness=0.700000
+# 重置标签活动指示器 单位秒
+TabActivityTimeout=3
+# 终端初始标题
+TitleInitial=
+# 动态设置标题 : 替换初始标题
+TitleMode=TERMINAL_TITLE_REPLACE
+# 是否作为登录Shell 运行命令
+CommandLoginShell=FALSE
+# 在命令启动时更新 utmp / wtmp 记录
+CommandUpdateRecords=TRUE
+# 使用shift + 上 / 下 键进行单行滚动
+# 输出时滚动
+ScrollingOnOutput=TRUE
+# 按键时滚动
+ScrollingOnKeystroke=TRUE
+
+# 默认字符编码
+Encoding=UTF-8
+# 禁用所有菜单访问键
+ShortcutsNoMnemonics=TRUE
+# 禁用菜单快捷键
+ShortcutsNoMenukey=TRUE
