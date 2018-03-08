@@ -122,6 +122,20 @@ function installFonts() {
   installCache
 }
 
+function installProxyChains() {
+  #statements
+  installCache
+  cp -rf $workPath/proxychains-ng $workPath/.cache
+  sudo apt -y install build-essential
+  cd proxychains-ng
+  ./configure --prefix=/usr --sysconfdir=/etc
+  make
+  sudo make install
+  sudo make install-config
+  # 配置 proxychains.conf . 默认端口改为 1088 . 请自行修改为自己节点设置的端口
+  sudo sed -i 's/socks4 	127.0.0.1 9050/socks5  127.0.0.1 1088/g' /etc/proxychains.conf
+}
+
 function someConfigure() {
   #statements
   # vim 常用功能
@@ -180,5 +194,7 @@ installOhMyZsh
 configDNS
 # 安装字体
 installFonts
+# 编译安装 ProxyChains-ng
+installProxyChains
 # 其他配置
 someConfigure
