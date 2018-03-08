@@ -66,6 +66,11 @@ function installGrub2Themes() {
   sudo update-grub
 }
 
+function installOsxArcThemes() {
+  #statements
+  sudo gdebi -n $workPath/osx-arc/osx-arc*.deb
+}
+
 function installOhMyZsh() {
   #statements
   # 安装ohmyzsh
@@ -175,6 +180,27 @@ function installPolybar() {
   make userconfig
 }
 
+function installMpdNcmpcpp() {
+  #statements
+  # 尝试删除旧的安装包 (如果存在)
+  sudo apt -y remove --purge mpd ncmpcpp && sudo apt -y autoremove
+  sudo rm -rf /etc/mpd.conf
+  sudo rm -rf $HOME/.config/mpd
+  sudo rm -rf $HOME/.mpd
+  # 安装 mpd ncmpcpp
+  sudo apt -y install mpd ncmpcpp
+  sudo systemctl stop mpd
+  sudo systemctl disable mpd
+  sudo rm -rf /etc/mpd.conf
+  # 配置 mpd ncmpcpp 需要的目录或文件
+  mkdir -p $HOME/.mpd/playlists
+  sudo cp -rf $workPath/mpd_ncmpcpp/mpd.conf $HOME/.mpd
+  touch $HOME/.mpd/{mpd.db,mpd.log,mpd.pid,mpdstate}
+  # 移动 ncmpcpp 的配置文件到 XDG_HOME_CONFIG
+  cp -rf $workPath/mpd_ncmpcpp/.ncmpcpp $HOME
+  sudo usermod -aG pulse,pulse-access mpd
+}
+
 function someConfigure() {
   #statements
   # vim 常用功能
@@ -213,6 +239,10 @@ VIM_CONF
   cp -rf $workPath/xfce4 $HOME/.config
   # 添加并配置通知主题配置文件
   cp -rf $workPath/xfce4-notifyd-theme.rc $HOME/.cache
+  # 设置通知主题字体
+  sudo sed -i '30 afont_name = "华文行楷 12"' /usr/share/themes/OSX-Arc-Shadow/xfce-notify-4.0/gtkrc
+  sudo sed -i "31 s/^/  / " /usr/share/themes/OSX-Arc-Shadow/xfce-notify-4.0/gtkrc
+  sudo sed -i '43 s/Bold/华文行楷 14/g' /usr/share/themes/OSX-Arc-Shadow/xfce-notify-4.0/gtkrc
   # 添加并配置 i3 配置文件
   mv $HOME/.config/i3/config $HOME/.config/i3/config.bak
   cp -rf $workPath/i3config/* $HOME/.config/i3/
@@ -236,6 +266,8 @@ VIM_CONF
 # installLightdmWebKit2
 # # 安装 Grub2 主题
 # installGrub2Themes
+# # 安装 OSX-arc GTK 主题
+# installOsxArcThemes
 # # 安装 OhMyZsh
 # installOhMyZsh
 # # 配置DNS
@@ -249,6 +281,8 @@ VIM_CONF
 # # 编译安装 i3Gaps
 # installI3Gaps
 # # 编译安装 Polybar
-installPolybar
+# installPolybar
+# # 安装 MPD , NCMPCPP
+installMpdNcmpcpp
 # # 其他配置
 # someConfigure
