@@ -34,7 +34,7 @@ function someNeedsApplications() {
   sudo apt -y install fcitx fcitx-data fcitx-frontend-qt4 fcitx-libs-qt fcitx-module-x11 fcitx-bin fcitx-frontend-all fcitx-frontend-qt5 fcitx-table fcitx-config-common fcitx-frontend-fbterm fcitx-libs fcitx-module-dbus fcitx-table-wubi fcitx-config-gtk fcitx-frontend-gtk2 fcitx-libs-dev fcitx-module-kimpanel fcitx-ui-classic fcitx-config-gtk2 fcitx-frontend-gtk3 fcitx-modules
   # 安装 telegram , Chrome , sogoupinyin , Atom , VSCode
   sudo apt -y update
-  sudo apt -y install telegram-desktop google-chrome-stable sogoupinyin atom code
+  sudo apt -y install telegram-desktop google-chrome-stable sogoupinyin atom code numix-gtk-theme numix-icon-theme
   # 卸载 dunst ,因为它与 xfce4-notifyd 会发生冲突
   # 卸载 NetworkManager
   sudo apt -y purge dunst notification-daemon network-manager network-manager-gnome
@@ -140,13 +140,22 @@ function someConfigure() {
   set incsearch
   set showmatch
 VIM_CONF
-# 更改默认shell为zsh
-chsh -s /usr/bin/zsh
+
+  # 生成 XDG_HOME_CONFIG
+  xdg-user-dirs-update
+  # 更改默认shell为zsh
+  chsh -s /usr/bin/zsh
+  cp -rf $workPath/.zshrc $HOME
+  # 移动壁纸到家目录
+  cp -rf $workPath/.wallpaper.png $HOME
+  # 移动头像到家目录
+  cp -rf $workPath/.face $HOME
+  # 移动音频文件到 Music
+  cp -rf $workPath/stay.mp3 $HOME/Music
   # 对于一些GUI程序无法弹出需要 gksudo的窗口,这或许会有用
   sudo sed -i '4 asession required pam_loginuid.so' /etc/pam.d/lightdm
   sudo sed -i '5 asession required pam_systemd.so' /etc/pam.d/lightdm
-  # 生成 XDG_HOME_CONFIG
-  xdg-user-dirs-update
+
 }
 
 # 安装需要的软件
