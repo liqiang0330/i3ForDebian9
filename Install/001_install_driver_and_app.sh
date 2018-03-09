@@ -25,7 +25,7 @@ function installCache() {
 function installApplications() {
   #statements
   sudo apt -y update
-  sudo apt -y install lightdm i3 git vim neofetch feh resolvconf fonts-wqy-zenhei lxappearance gdebi qt4-qtconfig compton curl wget ranger volumeicon-alsa alsa-utils pulseaudio pavucontrol fonts-arphic-uming arandr xdg-utils wpasupplicant wpagui htop p7zip-full xfce4-terminal xfce4-notifyd zsh xfce4-power-manager* thunar breeze-cursor-theme file-roller pulseaudio-module-bluetooth blueman rofi xbindkeys zsh-syntax-highlighting scrot imagemagick zathura* notify-osd tk
+  sudo apt -y install lightdm i3 git vim neofetch feh resolvconf fonts-wqy-zenhei lxappearance gdebi qt4-qtconfig compton curl wget ranger volumeicon-alsa alsa-utils pulseaudio pavucontrol fonts-arphic-uming arandr xdg-utils wpasupplicant wpagui htop p7zip-full xfce4-terminal xfce4-notifyd zsh xfce4-power-manager* thunar breeze-cursor-theme file-roller pulseaudio-module-bluetooth blueman rofi xbindkeys zsh-syntax-highlighting scrot imagemagick zathura* notify-osd tk Parcellite
 }
 
 function someNeedsApplications() {
@@ -34,7 +34,7 @@ function someNeedsApplications() {
   sudo apt -y install fcitx fcitx-data fcitx-frontend-qt4 fcitx-libs-qt fcitx-module-x11 fcitx-bin fcitx-frontend-all fcitx-frontend-qt5 fcitx-table fcitx-config-common fcitx-frontend-fbterm fcitx-libs fcitx-module-dbus fcitx-table-wubi fcitx-config-gtk fcitx-frontend-gtk2 fcitx-libs-dev fcitx-module-kimpanel fcitx-ui-classic fcitx-config-gtk2 fcitx-frontend-gtk3 fcitx-modules
   # 安装 telegram , Chrome , sogoupinyin , Atom , VSCode
   sudo apt -y update
-  sudo apt -y install telegram-desktop google-chrome-stable sogoupinyin atom code numix-gtk-theme 
+  sudo apt -y install telegram-desktop google-chrome-stable sogoupinyin atom code numix-gtk-theme
   # 卸载 dunst ,因为它与 xfce4-notifyd 会发生冲突
   # 卸载 NetworkManager
   sudo apt -y purge dunst notification-daemon network-manager network-manager-gnome
