@@ -72,9 +72,8 @@ font-5 = siji:pixelsize=14;2
 
 ;顶部Bar模块显示布局
 modules-left = i3
-modules-center =
-modules-right = backlight volume wlan networkspeedup networkspeeddown battery date powermenu
-;modules-right = backlight volume wlan battery date powermenu eth
+modules-center = date
+modules-right = wlan networkspeedup networkspeeddown backlight volume battery powermenu
 
 ;底部Bar
 [bar/bottom]
@@ -264,20 +263,14 @@ bar-progress-empty = ─
 [module/backlight]
 type = internal/backlight
 card = intel_backlight
-
-format = <label> <bar>
-label = ""
-label-foreground = ${colors.accent}
-bar-width = 10
-bar-indicator = |
-bar-indicator-foreground = #ff
-bar-indicator-font = 2
-bar-fill = ─
-bar-fill-font = 2
-bar-fill-foreground = #9f78e1
-bar-empty = ─
-bar-empty-font = 2
-bar-empty-foreground = ${colors.foreground-alt}
+format =  <ramp> <label>
+label = %percentage%%
+ramp-0 = %{F#ff5c57}
+ramp-1 = %{F#26A69A}
+ramp-2 = %{F#f3f99d}
+ramp-3 = %{F#5af78e}
+ramp-4 = %{F#9f78e1}
+label-foreground-0 = ${colors.accent}
 
 ;CPU运行频率
 [module/cpu]
@@ -370,32 +363,21 @@ label = %date% %time%
 
 ;音量
 [module/volume]
-type = internal/volume
 
-format-volume = <label-volume> <bar-volume>
-label-volume = " "
-label-volume-foreground = ${colors.accent}
+type = internal/volume
+master-soundcard=default
+master-mixer = Master
+
+format-volume = <ramp-volume> <label-volume>
 format-muted-prefix = " "
 format-muted-foreground = ${colors.foreground-alt}
 label-muted = muted
+ramp-volume-0 = %{F#ff5c57}
+ramp-volume-1 = %{F#5af78e}
+ramp-volume-2 = %{F#f3f99d}
+ramp-volume-3 = %{F#9f78e1}
+ramp-volume-4 = %{F#26A69A}
 
-bar-volume-width = 10
-bar-volume-foreground-0 = #5af78e
-bar-volume-foreground-1 = #5af78e
-bar-volume-foreground-2 = #5af78e
-bar-volume-foreground-3 = #5af78e
-bar-volume-foreground-4 = #5af78e
-bar-volume-foreground-5 = #f3f99d
-bar-volume-foreground-6 = #ff5c57
-bar-volume-gradient = false
-bar-volume-indicator = │
-bar-volume-indicator-font = 2
-bar-volume-indicator-foreground = #ff
-bar-volume-fill = ─
-bar-volume-fill-font = 2
-bar-volume-empty = ─
-bar-volume-empty-font = 2
-bar-volume-empty-foreground = ${colors.foreground-alt}
 
 ;电池
 [module/battery]
