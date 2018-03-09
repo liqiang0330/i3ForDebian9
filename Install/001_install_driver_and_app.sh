@@ -205,14 +205,20 @@ function installMpdNcmpcpp() {
 
 function installVimPlus() {
   #statements
-  # 复制文件
+  # Delete old files . if has .
   rm -rf $HOME/.vim
   rm -rf $HOME/.vimrc
+  rm -rf $HOME/.vimrc.local
+  rm -rf $HOME/.ycm_extra_conf.py
   mkdir -p $HOME/.vim
-  cp -rf $workPath/vimConfig/* $HOME/.vim
-  ln -s $HOME/.vim/.vimrc $HOME
+  # 复制文件
+  cp -rf $workPath/vimConfig/* $HOME/.vim/
+  cp -rf $workPath/vimConfig/.vimrc $HOME/.vim/
+  cp -rf $workPath/vimConfig/.vimrc.local $HOME/.vim/
+  cp -rf $workPath/vimConfig/.ycm_extra_conf.py $HOME/.vim/
+  cp -rf $HOME/.vim/.vimrc $HOME
   cp -rf $HOME/.vim/.vimrc.local $HOME
-  ln -s $HOME/.vim/.ycm_extra_conf.py $HOME
+  cp -rf $HOME/.vim/.ycm_extra_conf.py $HOME
   git clone https://github.com/VundleVim/Vundle.vim.git $HOME/.vim/bundle/Vundle.vim
   # 安装编译 YCM 所需依赖
   sudo apt-get install -y ctags build-essential cmake python-dev python3-dev vim-nox
@@ -310,37 +316,37 @@ function someConfigure() {
   sudo sed -i '5 asession required pam_systemd.so' /etc/pam.d/lightdm
 }
 
-# # 安装需要的软件
-# installApplications
-# # 安装其他需要的软件
-# someNeedsApplications
-# # 安装 LightdmWebKit2 和 主题
-# installLightdmWebKit2
-# # 安装 Grub2 主题
-# installGrub2Themes
-# # 安装 OSX-arc GTK 主题
-# installOsxArcThemes
-# # 安装 OhMyZsh
-# installOhMyZsh
-# # 配置DNS
-# configDNS
-# # 安装字体
-# installFonts
-# # 编译安装 ProxyChains-ng
-# installProxyChains
-# # 安装并配置 Shadowsocksr-Python
-# installShadowsocksr
-# # 编译安装 i3Gaps
-# installI3Gaps
-# # 编译安装 Polybar
-# installPolybar
-# # 安装 MPD , NCMPCPP
-# installMpdNcmpcpp
-# # 安装 VimPlus
+# 安装需要的软件
+installApplications
+# 安装其他需要的软件
+someNeedsApplications
+# 安装 LightdmWebKit2 和 主题
+installLightdmWebKit2
+# 安装 Grub2 主题
+installGrub2Themes
+# 安装 OSX-arc GTK 主题
+installOsxArcThemes
+# 安装 OhMyZsh
+installOhMyZsh
+# 配置DNS
+configDNS
+# 安装字体
+installFonts
+# 编译安装 ProxyChains-ng
+installProxyChains
+# 安装并配置 Shadowsocksr-Python
+installShadowsocksr
+# 编译安装 i3Gaps
+installI3Gaps
+# 编译安装 Polybar
+installPolybar
+# 安装 MPD , NCMPCPP
+installMpdNcmpcpp
+# 安装 VimPlus
 installVimPlus
-# # 其他配置
-# someConfigure
-# # 清理临时目录
-# sudo rm -rf $workPath/.cache
-# # 安装蓝牙驱动
-# installBluetooth
+# 其他配置
+someConfigure
+# 清理临时目录
+sudo rm -rf $workPath/.cache
+# 安装蓝牙驱动
+installBluetooth
