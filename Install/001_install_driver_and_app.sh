@@ -69,6 +69,8 @@ function installGrub2Themes() {
 function installOsxArcThemes() {
   #statements
   sudo gdebi -n $workPath/osx-arc/osx-arc*.deb
+  # 安装 numix-circle 图标
+  sudo cp -rf $workPath/numix-icon-theme-circle/* /usr/share/themes
 }
 
 function installOhMyZsh() {
