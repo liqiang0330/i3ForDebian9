@@ -124,6 +124,8 @@ function installFonts() {
   echo "Fonts installed , Updating font cache . "
   print_dot
   sudo fc-cache --force --verbose
+  # 生成 XDG_HOME_CONFIG
+  xdg-user-dirs-update
   sudo dpkg-reconfigure locales
   sudo sed -i 's/LANGUAGE="en_US:en"/LANGUAGE="zh_CN"/g' /etc/default/locale
   installCache
@@ -274,8 +276,6 @@ function installBluetooth() {
 
 function someConfigure() {
   #statements
-  # 生成 XDG_HOME_CONFIG
-  xdg-user-dirs-update
   # 更改默认shell为zsh
   chsh -s /usr/bin/zsh
   cp -rf $workPath/.zshrc $HOME
