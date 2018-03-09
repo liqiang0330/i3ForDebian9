@@ -25,19 +25,35 @@ function installCache() {
 function installApplications() {
   #statements
   sudo apt -y update
-  sudo apt -y install lightdm i3 git vim neofetch feh resolvconf fonts-wqy-zenhei lxappearance gdebi qt4-qtconfig compton curl wget ranger volumeicon-alsa alsa-utils pulseaudio pavucontrol fonts-arphic-uming arandr xdg-utils wpasupplicant wpagui htop p7zip-full xfce4-terminal xfce4-notifyd zsh xfce4-power-manager* thunar breeze-cursor-theme file-roller pulseaudio-module-bluetooth blueman rofi xbindkeys zsh-syntax-highlighting scrot imagemagick zathura* notify-osd tk Parcellite
+  sudo apt -y install lightdm i3 git vim neofetch feh resolvconf \
+      fonts-wqy-zenhei lxappearance gdebi qt4-qtconfig compton \
+      curl wget ranger volumeicon-alsa alsa-utils pulseaudio \
+      pavucontrol fonts-arphic-uming arandr xdg-utils \
+      wpasupplicant wpagui htop p7zip-full xfce4-terminal \
+      xfce4-notifyd zsh xfce4-power-manager* thunar \
+      breeze-cursor-theme file-roller pulseaudio-module-bluetooth \
+      blueman rofi xbindkeys zsh-syntax-highlighting scrot \
+      imagemagick zathura* notify-osd tk parcellite
 }
 
 function someNeedsApplications() {
   #statements
   # 安装 fcitx 输入法支持
-  sudo apt -y install fcitx fcitx-data fcitx-frontend-qt4 fcitx-libs-qt fcitx-module-x11 fcitx-bin fcitx-frontend-all fcitx-frontend-qt5 fcitx-table fcitx-config-common fcitx-frontend-fbterm fcitx-libs fcitx-module-dbus fcitx-table-wubi fcitx-config-gtk fcitx-frontend-gtk2 fcitx-libs-dev fcitx-module-kimpanel fcitx-ui-classic fcitx-config-gtk2 fcitx-frontend-gtk3 fcitx-modules
+  sudo apt -y install fcitx fcitx-data fcitx-frontend-qt4 \
+      fcitx-libs-qt fcitx-module-x11 fcitx-bin fcitx-frontend-all \
+      fcitx-frontend-qt5 fcitx-table fcitx-config-common \
+      fcitx-frontend-fbterm fcitx-libs fcitx-module-dbus \
+      fcitx-table-wubi fcitx-config-gtk fcitx-frontend-gtk2 \
+      fcitx-libs-dev fcitx-module-kimpanel fcitx-ui-classic \
+      fcitx-config-gtk2 fcitx-frontend-gtk3 fcitx-modules
   # 安装 telegram , Chrome , sogoupinyin , Atom , VSCode
   sudo apt -y update
-  sudo apt -y install telegram-desktop google-chrome-stable sogoupinyin atom code numix-gtk-theme
+  sudo apt -y install telegram-desktop google-chrome-stable \
+      sogoupinyin atom code numix-gtk-theme
   # 卸载 dunst ,因为它与 xfce4-notifyd 会发生冲突
   # 卸载 NetworkManager
-  sudo apt -y purge dunst notification-daemon network-manager network-manager-gnome
+  sudo apt -y purge dunst notification-daemon \
+      network-manager network-manager-gnome
 }
 
 function installLightdmWebKit2() {
@@ -80,7 +96,6 @@ function installOhMyZsh() {
   sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
   # 安装zsh-autosuggestions
   git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions
-
   installCache
 }
 
@@ -157,7 +172,10 @@ function installI3Gaps() {
   #statements
   installCache
   # 安装依赖
-  sudo apt -y install libxcb-keysyms1-dev libpango1.0-dev libxcb-util0-dev xcb libxcb1-dev libxcb-icccm4-dev libyajl-dev libev-dev libxcb-xkb-dev libxcb-cursor-dev libxkbcommon-dev libxcb-xinerama0-dev libxkbcommon-x11-dev libstartup-notification0-dev libxcb-randr0-dev libxcb-xrm0 libxcb-xrm-dev
+  sudo apt -y install libxcb-keysyms1-dev libpango1.0-dev libxcb-util0-dev \
+      xcb libxcb1-dev libxcb-icccm4-dev libyajl-dev libev-dev libxcb-xkb-dev \
+      libxcb-cursor-dev libxkbcommon-dev libxcb-xinerama0-dev libxkbcommon-x11-dev \
+      libstartup-notification0-dev libxcb-randr0-dev libxcb-xrm0 libxcb-xrm-dev
   cp -rf $workPath/i3-gaps $workPath/.cache
   cd i3-gaps
   # compile & install
@@ -175,7 +193,11 @@ function installPolybar() {
   #statements
   installCache
   # 安装 依赖
-  sudo apt -y install cmake cmake-data libcairo2-dev libxcb1-dev libxcb-ewmh-dev libxcb-icccm4-dev libxcb-image0-dev libxcb-randr0-dev libxcb-util0-dev libxcb-xkb-dev pkg-config python-xcbgen xcb-proto libxcb-xrm-dev i3-wm libjsoncpp-dev libasound2-dev libpulse-dev libmpdclient-dev libiw-dev libcurl4-openssl-dev libxcb-cursor-dev
+  sudo apt -y install cmake cmake-data libcairo2-dev libxcb1-dev libxcb-ewmh-dev \
+      libxcb-icccm4-dev libxcb-image0-dev libxcb-randr0-dev libxcb-util0-dev \
+      libxcb-xkb-dev pkg-config python-xcbgen xcb-proto libxcb-xrm-dev i3-wm \
+      libjsoncpp-dev libasound2-dev libpulse-dev libmpdclient-dev \
+      libiw-dev libcurl4-openssl-dev libxcb-cursor-dev
   cp -rf $workPath/polybar $workPath/.cache
   mkdir polybar/build
   cd polybar/build
