@@ -203,6 +203,36 @@ function installMpdNcmpcpp() {
   sudo usermod -aG pulse,pulse-access mpd
 }
 
+function installVimPlus() {
+  #statements
+  # 复制文件
+  rm -rf $HOME/.vim
+  rm -rf $HOME/.vimrc
+  mkdir -p $HOME/.vim
+  cp -rf $workPath/vimConfig/* $HOME/.vim
+  ln -s $HOME/.vim/.vimrc $HOME
+  cp -rf $HOME/.vim/.vimrc.local $HOME
+  ln -s $HOME/.vim/.ycm_extra_conf.py $HOME
+  git clone https://github.com/VundleVim/Vundle.vim.git $HOME/.vim/bundle/Vundle.vim
+  # 安装编译 YCM 所需依赖
+  sudo apt-get install -y ctags build-essential cmake python-dev python3-dev vim-nox
+  # 编译安装 YCM
+  cp -rf $workPath/YouCompleteMe $HOME/.vim/bundle
+  cd $HOME/.vim/bundle/YouCompleteMe
+  sudo ./install.py --clang-completer
+  vim -c "PluginInstall" -c "q" -c "q"
+  # 改变一些文件、文件夹属组和用户关系
+  who_is=$(who)
+  current_user=${who_is%% *}
+  sudo chown -R ${current_user}:${current_user} ~/.vim
+  sudo chown -R ${current_user}:${current_user} ~/.cache
+  # sudo chown ${current_user}:${current_user} ~/.vimrc
+  sudo chown ${current_user}:${current_user} ~/.vimrc.local
+  sudo chown ${current_user}:${current_user} ~/.viminfo
+  # sudo chown ${current_user}:${current_user} ~/.ycm_extra_conf.py
+  installCache
+}
+
 function installBluetooth() {
   #statements
   # 安装蓝牙驱动,这不适合所有用户
@@ -238,23 +268,6 @@ function installBluetooth() {
 
 function someConfigure() {
   #statements
-  # vim 常用功能
-  echo "Configure VIM"
-  cat <<VIM_CONF | tee $HOME/.vimrc
-  set nocompatible
-  set nu!
-  syntax on
-  set autoindent
-  set tabstop=4
-  set ai!
-  set history=1000
-  filetype on
-  set nocompatible
-  set ruler
-  set incsearch
-  set showmatch
-VIM_CONF
-
   # 生成 XDG_HOME_CONFIG
   xdg-user-dirs-update
   # 更改默认shell为zsh
@@ -297,35 +310,37 @@ VIM_CONF
   sudo sed -i '5 asession required pam_systemd.so' /etc/pam.d/lightdm
 }
 
-# 安装需要的软件
-installApplications
-# 安装其他需要的软件
-someNeedsApplications
-# 安装 LightdmWebKit2 和 主题
-installLightdmWebKit2
-# 安装 Grub2 主题
-installGrub2Themes
-# 安装 OSX-arc GTK 主题
-installOsxArcThemes
-# 安装 OhMyZsh
-installOhMyZsh
-# 配置DNS
-configDNS
-# 安装字体
-installFonts
-# 编译安装 ProxyChains-ng
-installProxyChains
-# 安装并配置 Shadowsocksr-Python
-installShadowsocksr
-# 编译安装 i3Gaps
-installI3Gaps
-# 编译安装 Polybar
-installPolybar
-# 安装 MPD , NCMPCPP
-installMpdNcmpcpp
-# 其他配置
-someConfigure
-# 清理临时目录
-sudo rm -rf $workPath/.cache
-# 安装蓝牙驱动
-installBluetooth
+# # 安装需要的软件
+# installApplications
+# # 安装其他需要的软件
+# someNeedsApplications
+# # 安装 LightdmWebKit2 和 主题
+# installLightdmWebKit2
+# # 安装 Grub2 主题
+# installGrub2Themes
+# # 安装 OSX-arc GTK 主题
+# installOsxArcThemes
+# # 安装 OhMyZsh
+# installOhMyZsh
+# # 配置DNS
+# configDNS
+# # 安装字体
+# installFonts
+# # 编译安装 ProxyChains-ng
+# installProxyChains
+# # 安装并配置 Shadowsocksr-Python
+# installShadowsocksr
+# # 编译安装 i3Gaps
+# installI3Gaps
+# # 编译安装 Polybar
+# installPolybar
+# # 安装 MPD , NCMPCPP
+# installMpdNcmpcpp
+# # 安装 VimPlus
+installVimPlus
+# # 其他配置
+# someConfigure
+# # 清理临时目录
+# sudo rm -rf $workPath/.cache
+# # 安装蓝牙驱动
+# installBluetooth
