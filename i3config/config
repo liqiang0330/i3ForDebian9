@@ -87,7 +87,7 @@ bindsym $mod+f fullscreen toggle
 # 改变当前窗口的布局方式
 # 其中s为垂直方向重叠
 # z为水平方向表格模式
-# e推出前两种布局方式，单独应用则为线性布局
+# 切换 横向/纵向 布局
 bindsym $mod+s layout stacking
 bindsym $mod+z layout tabbed
 bindsym $mod+e layout toggle split
@@ -132,18 +132,15 @@ set $tag9 "9:"
 set $tag10 "10:"
 
 # exec startup apps
-# exec --no-startup-id i3-msg 'exec thunderbird'
 # AutoStart 自动启动
 exec --no-startup-id feh --bg-fill ~/.wallpaper.png
-#exec --no-startup-id i3-msg 'exec geary'
 exec --no-startup-id i3-msg 'exec compton -b --config ~/.config/compton.conf'
 exec --no-startup-id i3-msg 'exec blueman-applet'
-exec --no-startup-id i3-msg 'exec nm-applet'
+# exec --no-startup-id i3-msg 'exec nm-applet'
 exec --no-startup-id i3-msg 'exec mpd'
 exec --no-startup-id i3-msg 'exec xbindkeys'
 exec --no-startup-id i3-msg 'exec xfce4-power-manager'
-exec --no-startup-id i3-msg 'exec xfce4-volumed'
-# exec --no-startup-id i3-msg 'workspace $tag1; exec google-chrome-stable &'
+exec --no-startup-id i3-msg 'workspace $tag1; exec google-chrome-stable &'
 exec --no-startup-id i3-msg 'workspace $tag2; exec xfce4-terminal'
 # exec --no-startup-id i3-msg 'workspace $tag4; exec termite -e "screen -rd weechat &"; workspace $tag2'
 # exec --no-startup-id i3-msg 'workspace $tag10; exec termite -e "glances"; workspace $tag2'
@@ -187,31 +184,22 @@ bindsym $mod+Control+e exec thunar
 for_window [class="vim"] floating enable, border normal
 # for_window [class="XTerm"] floating enable, border normal
 for_window [class="feh"] floating enable, border normal
-for_window [class="Telegram-Desktop"] floating enable, border normal
-
+for_window [class="telegram-desktop"] floating enable, border normal
 # assigns focus
 # 给工作区分配图标/焦点？
-assign [class="Thunderbird"] $tag3
-
-assign [class="Lollypop"] $tag5
-for_window [class="Lollypop"] focus
-
-assign [class="Code"] $tag6
+assign [class="Code"] $tag3
 for_window [class="Code"] focus
 
-assign [class="WebTorrent"] $tag7
-for_window [class="WebTorrent"] focus
+assign [class="telegramdesktop"] $tag5
+for_window [class="telegramdesktop"] focus
 
-assign [class="Ncmpcpp"] $tag9
-for_window [class="Ncmpcpp"] focus
-
-# assign [class="Ncmpcpp"] $tag10
-# for_window [class="Ncmpcpp"] focus
+assign [class="ncmpcpp"] $tag9
+for_window [class="ncmpcpp"] focus
 
 #toggle workspace's display screen
 #切换工作区的显示屏幕
-bindsym $mod+less move workspace to output right
-bindsym $mod+Shift+less move workspace to output up
+bindsym $mod+minus move workspace to output right
+bindsym $mod+Shift+minus move workspace to output up
 
 
 #assign workspace to screens
@@ -262,7 +250,7 @@ bindsym $mod+Shift+c reload
 # 重新启动i3，一般发生在i3升级之后
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+# bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 # resize window (you can also use the mouse for that)
 # 重设窗口大小
