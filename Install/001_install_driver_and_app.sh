@@ -52,7 +52,7 @@ function installLightdmWebKit2() {
   # 更改默认ubuntu默认的unity-greeter为lightdm-webkit2-greeter
   sudo sed -i '/#greeter-session=example-gtk-gnome/agreeter-session=lightdm-webkit2-greeter' /etc/lightdm/lightdm.conf
   # 更换"lightdm-webkit2-greeter"主题为aether
-  sudo git clone https://github.com/NoiSek/Aether.git /usr/share/lightdm-webkit/themes/lightdm-webkit-theme-aether
+  sudo cp -rf $workPath/Aether /usr/share/lightdm-webkit/themes/lightdm-webkit-theme-aether
   sudo sed -i 's/^webkit_theme\s*=\s*\(.*\)/webkit_theme = lightdm-webkit-theme-aether #\1/g' /etc/lightdm/lightdm-webkit2-greeter.conf
 }
 
