@@ -34,10 +34,10 @@ function installSourcesAndDebiancnSources() {
   chmod 644 /etc/apt/sources.list
   chown root:root /etc/apt/sources.list
   # 添加 Debiancn 源
-  echo "deb https://mirrors.ustc.edu.cn/debiancn/ buster main" | sudo tee /etc/apt/sources.list.d/debiancn.list
+  echo "deb https://mirrors.ustc.edu.cn/debiancn/ buster main" | tee /etc/apt/sources.list.d/debiancn.list
   wget -c https://mirrors.ustc.edu.cn/debiancn/debiancn-keyring_0~20161212_all.deb -O debiancn-keyring.deb
   apt -y install ./debiancn-keyring.deb
-  apt -y update && sudo apt -y upgrade
+  apt -y update && apt -y upgrade
   rm -rf sources.list
   rm -rf debiancn-keyring.deb
 }
@@ -57,7 +57,7 @@ function addUserToSudo() {
 
 function openBashCompletion() {
   #statements
-cat <<BASH_COMPLETION | sudo tee -a /etc/bash.bashrc
+cat <<BASH_COMPLETION | tee -a /etc/bash.bashrc
 # enable bash completion in interactive shells
 if ! shopt -oq posix; then
   if [ -f /usr/share/bash-completion/bash_completion ]; then
