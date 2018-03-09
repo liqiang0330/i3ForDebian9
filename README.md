@@ -7,8 +7,9 @@
 #### 克隆该仓库到 HOME 目录
 ```sh
 cd ~
+apt update
+apt install git
 git clone https://github.com/LimoYuan/i3ForDebian9.git
-# 如果因为网络原因克隆很慢可以下载打包好的文件解压到 HOME 目录
 ```
 ### VirtualBox 安装:
 ```sh
@@ -39,8 +40,8 @@ su #你创建的普通用户
 # modprobe wl
 #
 ############################
-# apt -y install linux-headers-$(uname -r|sed 's/[^-]*-[^-]*-//') linux-headers-$(uname -r|sed 's/[^-]*-[^-]*-//') nvidia-driver
-# 只需要注释下面这几行
+apt -y install linux-headers-$(uname -r|sed 's/[^-]*-[^-]*-//') linux-headers-$(uname -r|sed 's/[^-]*-[^-]*-//') nvidia-driver
+# 单 NVIDIA 显卡 , 只需要注释下面这几行
 # dpkg --add-architecture i386 && apt -y update && apt -y install bumblebee-nvidia primus primus-libs:i386
 # echo -en "\033[33m Please input you create username , It add to  bumblebee! :  \033[0m"
 # read username
