@@ -49,7 +49,7 @@ function someNeedsApplications() {
   # 安装 telegram , Chrome , sogoupinyin , Atom , VSCode
   sudo apt -y update
   sudo apt -y install telegram-desktop google-chrome-stable \
-      sogoupinyin atom code numix-gtk-theme
+      sogoupinyin atom code numix-gtk-theme numix-icon-theme
   # 卸载 dunst ,因为它与 xfce4-notifyd 会发生冲突
   # 卸载 NetworkManager
   sudo apt -y purge dunst notification-daemon \
@@ -86,7 +86,7 @@ function installOsxArcThemes() {
   #statements
   sudo gdebi -n $workPath/osx-arc/osx-arc*.deb
   # 安装 numix-circle 图标
-  sudo cp -rf $workPath/numix-icon-theme-circle/* /usr/share/icons
+  # sudo cp -rf $workPath/numix-icon-theme-circle/* /usr/share/icons
 }
 
 function installOhMyZsh() {
