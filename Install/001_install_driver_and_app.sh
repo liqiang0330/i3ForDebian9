@@ -25,7 +25,7 @@ function installCache() {
 function installApplications() {
   #statements
   sudo apt -y update
-  sudo apt -y install lightdm i3 git vim neofetch feh resolvconf fonts-wqy-zenhei lxappearance gdebi qt4-qtconfig compton curl wget ranger volumeicon-alsa pulseaudio pavucontrol fonts-arphic-uming arandr xdg-utils wpasupplicant wpagui htop p7zip-full xfce4-terminal xfce4-notifyd zsh xfce4-power-manager* thunar breeze-cursor-theme file-roller pulseaudio-module-bluetooth blueman rofi xbindkeys zsh-syntax-highlighting scrot imagemagick zathura* notify-osd tk
+  sudo apt -y install lightdm i3 git vim neofetch feh resolvconf fonts-wqy-zenhei lxappearance gdebi qt4-qtconfig compton curl wget ranger volumeicon-alsa alsa-utils pulseaudio pavucontrol fonts-arphic-uming arandr xdg-utils wpasupplicant wpagui htop p7zip-full xfce4-terminal xfce4-notifyd zsh xfce4-power-manager* thunar breeze-cursor-theme file-roller pulseaudio-module-bluetooth blueman rofi xbindkeys zsh-syntax-highlighting scrot imagemagick zathura* notify-osd tk
 }
 
 function someNeedsApplications() {
@@ -243,9 +243,9 @@ VIM_CONF
   # 添加并配置通知主题配置文件
   cp -rf $workPath/xfce4-notifyd-theme.rc $HOME/.cache
   # 设置通知主题字体
-  sudo sed -i '30 afont_name = "华文行楷 12"' /usr/share/themes/OSX-Arc-Shadow/xfce-notify-4.0/gtkrc
+  sudo sed -i '30 afont_name = "STXingkai 12"' /usr/share/themes/OSX-Arc-Shadow/xfce-notify-4.0/gtkrc
   sudo sed -i "31 s/^/  / " /usr/share/themes/OSX-Arc-Shadow/xfce-notify-4.0/gtkrc
-  sudo sed -i '43 s/Bold/华文行楷 14/g' /usr/share/themes/OSX-Arc-Shadow/xfce-notify-4.0/gtkrc
+  sudo sed -i '43 s/Bold/STXingkai 14/g' /usr/share/themes/OSX-Arc-Shadow/xfce-notify-4.0/gtkrc
   # 添加并配置 i3 配置文件
   mv $HOME/.config/i3/config $HOME/.config/i3/config.bak
   cp -rf $workPath/i3config/* $HOME/.config/i3/
@@ -258,9 +258,6 @@ VIM_CONF
   # 对于一些GUI程序无法弹出需要 gksudo的窗口,这或许会有用
   sudo sed -i '4 asession required pam_loginuid.so' /etc/pam.d/lightdm
   sudo sed -i '5 asession required pam_systemd.so' /etc/pam.d/lightdm
-  # 关闭终端 警告音
-  xset b off
-
 }
 
 # # 安装需要的软件

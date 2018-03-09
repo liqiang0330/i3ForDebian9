@@ -107,5 +107,5 @@ addUserToSudo
 openBashCompletion
 # 安装 X 环境 , 和一些驱动驱动
 installDevice
-# 清除临时目录 ( 仅针对 root 用户执行时需要 )
+# 清除临时目录 ( 当前为 root 目录下的workPath )
 rm -rf $workPath
