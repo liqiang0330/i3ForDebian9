@@ -172,12 +172,13 @@ function installI3Gaps() {
   #statements
   installCache
   # 安装依赖
-  sudo apt -y install libxcb-keysyms1-dev libpango1.0-dev libxcb-util0-dev \
-      xcb libxcb1-dev libxcb-icccm4-dev libyajl-dev libev-dev libxcb-xkb-dev \
-      libxcb-cursor-dev libxkbcommon-dev libxcb-xinerama0-dev libxkbcommon-x11-dev \
-      libstartup-notification0-dev libxcb-randr0-dev libxcb-xrm0 libxcb-xrm-dev
+sudo apt -y install libxcb-keysyms1-dev libpango1.0-dev libxcb-util0-dev xcb \
+                                libxcb1-dev libxcb-icccm4-dev libyajl-dev libev-dev libxcb-xkb-dev \
+                                libxcb-cursor-dev libxkbcommon-dev libxcb-xinerama0-dev \
+                                libxkbcommon-x11-dev libstartup-notification0-dev \
+                                libxcb-randr0-dev libxcb-xrm0 libxcb-xrm-dev
   cp -rf $workPath/i3-gaps $workPath/.cache
-  cd i3-gaps
+  cd $workPath/.cache/i3-gaps
   # compile & install
   autoreconf --force --install
   rm -rf build/
@@ -365,7 +366,7 @@ installPolybar
 # 安装 MPD , NCMPCPP
 installMpdNcmpcpp
 # 安装 VimPlus
-installVimPlus
+installVimPluss
 # 其他配置
 someConfigure
 # 清理临时目录

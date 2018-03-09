@@ -38,8 +38,6 @@ function installSourcesAndDebiancnSources() {
   wget -c https://mirrors.ustc.edu.cn/debiancn/debiancn-keyring_0~20161212_all.deb -O debiancn-keyring.deb
   apt -y install ./debiancn-keyring.deb
   apt -y update && apt -y upgrade
-  rm -rf sources.list
-  rm -rf debiancn-keyring.deb
 }
 
 function addUserToSudo() {
