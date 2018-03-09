@@ -201,6 +201,39 @@ function installMpdNcmpcpp() {
   sudo usermod -aG pulse,pulse-access mpd
 }
 
+function installBluetooth() {
+  #statements
+  # 安装蓝牙驱动,这不适合所有用户
+    echo -e "\033[33m Install Bluetooth driver , Only applies to BCM94352HMB device. \033[0m"
+    echo -en "\033[33m Your Bluetooth device is BCM94352HMB ? Input:  ( y or other ) \033[0m"
+    read action
+    case $action in
+      y )
+       sudo cp -rf $workPath/bluetooth/BCM207*.hcd /lib/firmware/brcm
+       echo -e "\033[33m  Update your system , Remove not software. \033[0m"
+       sudo apt -y update && sudo apt -y upgrade && sudo apt -y autoremove
+       echo
+       echo
+       echo -e "\033[33m  Install script is successful . 5 sec after Reboot system. \033[0m"
+       echo
+       echo
+       sleep 5
+       sudo reboot
+        ;;
+      * )
+      echo -e "\033[33m  Update your system , Remove not software. \033[0m"
+      sudo apt -y update && sudo apt -y upgrade && sudo apt -y autoremove
+      echo
+      echo
+      echo -e "\033[33m  Install script is successful . 5 sec after Reboot system. \033[0m"
+      echo
+      echo
+      sleep 5
+      sudo reboot
+        ;;
+    esac
+}
+
 function someConfigure() {
   #statements
   # vim 常用功能
@@ -260,31 +293,35 @@ VIM_CONF
   sudo sed -i '5 asession required pam_systemd.so' /etc/pam.d/lightdm
 }
 
-# # 安装需要的软件
-# installApplications
-# # 安装其他需要的软件
-# someNeedsApplications
-# # 安装 LightdmWebKit2 和 主题
-# installLightdmWebKit2
-# # 安装 Grub2 主题
-# installGrub2Themes
-# # 安装 OSX-arc GTK 主题
-# installOsxArcThemes
-# # 安装 OhMyZsh
-# installOhMyZsh
-# # 配置DNS
-# configDNS
-# # 安装字体
-# installFonts
-# # 编译安装 ProxyChains-ng
-# installProxyChains
-# # 安装并配置 Shadowsocksr-Python
-# installShadowsocksr
-# # 编译安装 i3Gaps
-# installI3Gaps
-# # 编译安装 Polybar
-# installPolybar
-# # 安装 MPD , NCMPCPP
-# installMpdNcmpcpp
-# # 其他配置
+# 安装需要的软件
+installApplications
+# 安装其他需要的软件
+someNeedsApplications
+# 安装 LightdmWebKit2 和 主题
+installLightdmWebKit2
+# 安装 Grub2 主题
+installGrub2Themes
+# 安装 OSX-arc GTK 主题
+installOsxArcThemes
+# 安装 OhMyZsh
+installOhMyZsh
+# 配置DNS
+configDNS
+# 安装字体
+installFonts
+# 编译安装 ProxyChains-ng
+installProxyChains
+# 安装并配置 Shadowsocksr-Python
+installShadowsocksr
+# 编译安装 i3Gaps
+installI3Gaps
+# 编译安装 Polybar
+installPolybar
+# 安装 MPD , NCMPCPP
+installMpdNcmpcpp
+# 其他配置
 someConfigure
+# 清理临时目录
+sudo rm -rf $workPath/.cache
+# 安装蓝牙驱动
+installBluetooth
