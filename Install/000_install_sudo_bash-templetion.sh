@@ -100,6 +100,12 @@ function installDevice() {
   esac
 }
 
+function removePcspkr() {
+  #statements
+  echo "blacklist pcspkr" >> /etc/modprobe.d/blacklist.conf
+  modprobe -r pcspkr
+}
+
 # 更换软件源为 ustc
 installSourcesAndDebiancnSources
 # 安装 sudo , bash-completion . 开启 sudo 和 shell Tab 补全
@@ -107,5 +113,7 @@ addUserToSudo
 openBashCompletion
 # 安装 X 环境 , 和一些驱动驱动
 installDevice
+# 关闭 pcspkr 警告音
+removePcspkr
 # 清除临时目录 ( 当前为 root 目录下的workPath )
 rm -rf $workPath
