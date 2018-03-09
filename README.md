@@ -22,7 +22,7 @@ su root
 # 看到 tty 提示 Please select install option [vir == VirtualBox ; Other == Your computer] 时 , 输入 vir
 # 安装过程中需要输入你创建的普通用户账号 , 具体看到提示后操作
 # 000 脚本安装完成后 , 切换到你创建的普通用户
-su #你创建的普通用户
+su youCreateUsername #你创建的普通用户
 # 执行 001 脚本
 ./001_install_driver_and_app.sh
 # 安装过程中需要你输入一些信息 , 请按提示输入
@@ -59,7 +59,7 @@ nvidia-xconfig
 # 理论上现在你可以按照上面的步骤进行安装该脚本了
 ```
 ## 脚本中安装的所有软件包(待添加)
-#
+#LimoYuan
 ## i3wm快捷方式(待添加)
 #
 ## 截图(待添加)
