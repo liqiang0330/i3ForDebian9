@@ -286,6 +286,8 @@ VIM_CONF
   cp -rf $workPath/i3config/* $HOME/.config/i3/
   # 添加并配置 Polybar 配置文件
   cp -rf $workPath/polybarconf/* $HOME/.config/polybar/
+  # qt4 配置文件
+  cp -rf $workPath/qt4Config/* $HOME/.config
   # 添加并配置 GTK 主题配置
   cp -rf $workPath/gtk-2.0 $HOME/.config
   cp -rf $workPath/gtk-3.0 $HOME/.config
