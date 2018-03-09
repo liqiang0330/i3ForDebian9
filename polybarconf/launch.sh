@@ -1,5 +1,5 @@
 #!/usr/bin/env sh
-DIS_MONITOR=$(xrandr | grep "connected [0-9]" | cut -d' ' -f 1)
+DIS_MONITOR=$(xrandr | grep "connected primary [0-9]" | cut -d' ' -f 1)
 # Terminate already running bar instances
 killall -q polybar
 
