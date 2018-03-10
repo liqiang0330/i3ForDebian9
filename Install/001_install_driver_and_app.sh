@@ -311,7 +311,6 @@ function someConfigure() {
   chsh -s /usr/bin/zsh
   # 创建未重启没有自动创建的文件夹
   mkdir -p $HOME/.config/i3
-  mkdir -p $HOME/.config/polybar
   cp -rf $workPath/.zshrc $HOME
   # 移动壁纸到家目录
   cp -rf $workPath/.wallpaper.png $HOME
@@ -329,11 +328,11 @@ function someConfigure() {
   # 添加并配置 xfce4 terminal 和 thunar 等配置
   cp -rf $workPath/xfce4 $HOME/.config
   # 添加并配置通知主题配置文件
-  cp -rf $workPath/xfce4-notifyd-theme.rc $HOME/.cache
+  # cp -rf $workPath/xfce4-notifyd-theme.rc $HOME/.cache
   # 设置通知主题字体
-  sudo sed -i '30 afont_name = "STXingkai 12"' /usr/share/themes/OSX-Arc-Shadow/xfce-notify-4.0/gtkrc
-  sudo sed -i "31 s/^/  / " /usr/share/themes/OSX-Arc-Shadow/xfce-notify-4.0/gtkrc
-  sudo sed -i '43 s/Bold/STXingkai 14/g' /usr/share/themes/OSX-Arc-Shadow/xfce-notify-4.0/gtkrc
+  # sudo sed -i '30 afont_name = "STXingkai 12"' /usr/share/themes/OSX-Arc-Shadow/xfce-notify-4.0/gtkrc
+  # sudo sed -i "31 s/^/  / " /usr/share/themes/OSX-Arc-Shadow/xfce-notify-4.0/gtkrc
+  # sudo sed -i '43 s/Bold/STXingkai 14/g' /usr/share/themes/OSX-Arc-Shadow/xfce-notify-4.0/gtkrc
   # 添加并配置 i3 配置文件
   # mv $HOME/.config/i3/config $HOME/.config/i3/config.bak
   cp -rf $workPath/i3config/* $HOME/.config/i3/
