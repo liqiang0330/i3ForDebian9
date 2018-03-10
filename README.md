@@ -70,7 +70,9 @@ apt -y install linux-headers-$(uname -r|sed 's/[^-]*-[^-]*-//') linux-headers-$(
 # sed -i "/#   BusID \"PCI:01:00:0\"/a\BusID \"PCI:$NvidiaGraphics\"" /etc/bumblebee/xorg.conf.nvidia
 # 然后在下一行中添加 xserver-xorg-video-nvidia , nvidia-xconfig
 # 看是这样
-apt -y install xserver-xorg-input-evdev xserver-xorg-input-kbd xserver-xorg-input-mouse xserver-xorg-input-synaptics x11-xserver-utils x11-utils x11-xkb-utils firmware-brcm80211 xserver-xorg-video-nvidia nvidia-xconfig # 其中 firmware-brcm80211 也是 BCM 无线网卡需要安装的驱动 , 如果你不是 BCM 无线网卡 , 请删掉它
+apt -y install xserver-xorg-input-evdev xserver-xorg-input-kbd xserver-xorg-input-mouse \
+xserver-xorg-input-synaptics x11-xserver-utils x11-utils x11-xkb-utils \
+firmware-brcm80211 xserver-xorg-video-nvidia nvidia-xconfig # 其中 firmware-brcm80211 也是 BCM 无线网卡需要安装的驱动 , 如果你不是 BCM 无线网卡 , 请删掉它
 # 然后增加下面这条命令 , 便可执行脚本
 nvidia-xconfig
 # 理论上现在你可以按照上面的步骤进行安装该脚本了
