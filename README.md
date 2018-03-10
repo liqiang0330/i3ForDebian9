@@ -62,8 +62,13 @@ nvidia-xconfig
 #LimoYuan
 ## i3wm快捷方式(待添加)
 #
-## 截图(待添加)
-#
+## 截图
+![Screenshots](Screenshots/2018-03-10-230200_1600x900_scrot.png)
+![Screenshots](screenshots/2018-03-10-224117_1600x900_scrot.png)
+![Screenshots](screenshots/2018-03-10-225632_1600x900_scrot.png)
+![Screenshots](screenshots/2018-03-10-224909_1600x900_scrot.png)
+![Screenshots](screenshots/IMG_20180310_231447_395__01.jpg)
+------
 ## 该脚本使用到的一些程序和文件来自 :
 #### [i3Gaps](https://github.com/Airblader/i3)
 #### [Polybar](https://github.com/jaagr/polybar)
@@ -76,4 +81,5 @@ nvidia-xconfig
 #### [Shadowsocksr_python](https://github.com/shadowsocksr-backup/shadowsocksr)
 #### [Proxychains-ng](https://github.com/rofl0r/proxychains-ng)
 #### [Oh-My-Zsh](https://github.com/robbyrussell/oh-my-zsh)
+#### [VimPlus](https://github.com/chxuan/vimplus)
 #### 诚谢以上项目 . 可能还有其他没有列出 . 之后再添加
