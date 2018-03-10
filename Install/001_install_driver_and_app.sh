@@ -33,8 +33,8 @@ function installApplications() {
       xfce4-notifyd zsh xfce4-power-manager* thunar \
       breeze-cursor-theme file-roller pulseaudio-module-bluetooth \
       blueman rofi xbindkeys zsh-syntax-highlighting scrot \
-      imagemagick zathura* notify-osd tk parcellite network-manager network-manager-gnome \
-      mesa*
+      imagemagick zathura* tk parcellite network-manager network-manager-gnome \
+      mesa* gpick
 }
 
 function someNeedsApplications() {
