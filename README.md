@@ -64,6 +64,7 @@ nvidia-xconfig
 ![Screenshots](Screenshots/2018-03-10-225632_1600x900_scrot.png)
 ![Screenshots](Screenshots/2018-03-10-224909_1600x900_scrot.png)
 ![Screenshots](Screenshots/IMG_20180310_231447_395__01.jpg)
+![Screenshots](Screenshots/2018-03-11-000800_1600x900_scrot.png)
 ------
 
 ## 脚本中安装的所有软件包
