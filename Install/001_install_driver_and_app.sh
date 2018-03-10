@@ -116,11 +116,14 @@ function installFonts() {
   installCache
   bash $workPath/fonts/fonts-master/install.sh
   sudo cp -rf $workPath/fonts/noto* /usr/share/fonts/truetype/
-  sudo cp -rf $workPath/fonts/66-noto* /etc/fonts/conf.avail/
-  wget -c https://raw.githubusercontent.com/ohmyarch/fontconfig-zh-cn/master/fonts.conf
+  sudo cp -rf $workPath/fonts/fontConfig/66-noto* /etc/fonts/conf.avail/
+  # wget -c https://raw.githubusercontent.com/ohmyarch/fontconfig-zh-cn/master/fonts.conf
   mkdir -p $HOME/.config/fontconfig
   mkdir -p $HOME/.local/share/fonts
-  cp -rf fonts.conf $HOME/.config/fontconfig
+  mkdir -p $HOME/.config/fontconfig/conf.d
+  cp -rf $workPath/fonts/fontConfig/fonts.conf $HOME/.config/fontconfig
+  rm -rf $HOME/.config/fontconfig/conf.d/10-powerline-symbols.conf
+  cp -rf $workPath/fonts/fontConfig/10-powerline-symbols.conf $HOME/.config/fontconfig
   cp -rf $workPath/fonts/Mesl* $HOME/.local/share/fonts
   cp -rf $workPath/fonts/myfonts $HOME/.local/share/fonts
   cp -rf $workPath/fonts/fontawesome $HOME/.local/share/fonts
