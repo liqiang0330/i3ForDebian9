@@ -248,9 +248,11 @@ function installVimPlus() {
   cp -rf $HOME/.vim/.vimrc $HOME
   cp -rf $HOME/.vim/.vimrc.local $HOME
   cp -rf $HOME/.vim/.ycm_extra_conf.py $HOME
-  git clone https://github.com/VundleVim/Vundle.vim.git $HOME/.vim/bundle/Vundle.vim
+  # git clone https://github.com/VundleVim/Vundle.vim.git $HOME/.vim/bundle/Vundle.vim
   # 安装编译 YCM 所需依赖
   sudo apt-get install -y ctags build-essential cmake python-dev python3-dev vim-nox
+  # 解压 bundle 文件
+  cd $HOME/.vim && tar -zxvf bundle.tar.gz
   # 编译安装 YCM
   cp -rf $workPath/YouCompleteMe $HOME/.vim/bundle
   cd $HOME/.vim/bundle/YouCompleteMe
@@ -265,6 +267,8 @@ function installVimPlus() {
   sudo chown ${current_user}:${current_user} ~/.vimrc.local
   sudo chown ${current_user}:${current_user} ~/.viminfo
   # sudo chown ${current_user}:${current_user} ~/.ycm_extra_conf.py
+  # 删除 bundle.tar.gz
+  rm -rf $HOME/.vim/bundle.tar.gz
   installCache
 }
 
