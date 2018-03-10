@@ -19,10 +19,10 @@ fi
 
 if [[ "$action" == "shutdown" ]]
 then
-    shutdown now
+    gksudo shutdown now
 fi
 
 if [[ "$action" == "reboot" ]]
 then
-    reboot
+    gksudo reboot
 fi

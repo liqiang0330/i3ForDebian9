@@ -302,6 +302,13 @@ function installBluetooth() {
     esac
 }
 
+function installGkSudo() {
+  #statements
+  sudo gdebi -n $workPath/gksudoPkg/libgtop2-7*.deb
+  sudo gdebi -n $workPath/gksudoPkg/libgksu2-0_2*.deb
+  sudo gdebi -n $workPath/gksudoPkg/gksu_2*.deb
+}
+
 function someConfigure() {
   #statements
   # 更改默认shell为zsh
@@ -376,6 +383,8 @@ function main() {
   installMpdNcmpcpp
   # 安装 VimPlus
   installVimPlus
+  # 安装 gksudo 及其需要的依赖 . 由于某种原因 gksudo 被 debian testing 移除 . 但有些地方需要使用 , 故装一下
+  installGkSudo
   # 其他配置
   someConfigure
   # 清理临时目录
