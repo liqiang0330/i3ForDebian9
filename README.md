@@ -58,10 +58,6 @@ apt -y install xserver-xorg-input-evdev xserver-xorg-input-kbd xserver-xorg-inpu
 nvidia-xconfig
 # 理论上现在你可以按照上面的步骤进行安装该脚本了
 ```
-## 脚本中安装的所有软件包(待添加)
-#LimoYuan
-## i3wm快捷方式(待添加)
-#
 ## 截图
 ![Screenshots](Screenshots/2018-03-10-232235_1600x900_scrot.png)
 ![Screenshots](Screenshots/2018-03-10-224117_1600x900_scrot.png)
@@ -69,6 +65,83 @@ nvidia-xconfig
 ![Screenshots](Screenshots/2018-03-10-224909_1600x900_scrot.png)
 ![Screenshots](Screenshots/IMG_20180310_231447_395__01.jpg)
 ------
+
+## 脚本中安装的所有软件包
+#### 000_install_sudo_*.sh 中安装的软件 :
+```sh
+debiancn-keyring.deb # Debiancn 源
+apt -y install sudo bash-completion
+# 虚拟机安装 . 在执行该脚本之前 , 需要安装 vbox 扩展 , 并点击 vbox 菜单栏中的安装增强功能的选项
+apt -y install linux-headers-$(uname -r|sed 's/[^-]*-[^-]*-//') \
+    linux-headers-$(uname -r|sed 's,[^-]*-[^-]*-,,') \
+    linux-image-$(uname -r|sed 's,[^-]*-[^-]*-,,')
+apt -y install xserver-xorg-input-evdev \
+    xserver-xorg-input-kbd \
+    xserver-xorg-input-mouse \
+    xserver-xorg-input-synaptics \
+    xserver-xorg-video-vesa \
+    xserver-xorg-video-vmware \
+    x11-xserver-utils \
+    x11-utils \
+    x11-xkb-utils #virtualbox-guest-x11 virtualbox-guest-utils
+apt -y install build-essential make perl
+mount /dev/sr0 /mnt/ && cd /mnt
+./VBoxLinuxAdditions.run
+# I + N 笔记本安装
+apt -y install linux-image-$(uname -r|sed 's,[^-]*-[^-]*-,,') \
+    linux-headers-$(uname -r|sed 's,[^-]*-[^-]*-,,') broadcom-sta-dkms
+modprobe -r b44 b43 b43legacy ssb brcmsmac bcma
+modprobe wl
+apt -y install linux-headers-$(uname -r|sed 's/[^-]*-[^-]*-//') \
+    linux-headers-$(uname -r|sed 's/[^-]*-[^-]*-//') nvidia-driver
+apt -y install bumblebee-nvidia primus
+apt -y install xserver-xorg-input-evdev \
+    xserver-xorg-input-kbd \
+    xserver-xorg-input-mouse \
+    xserver-xorg-input-synaptics \
+    x11-xserver-utils \
+    x11-utils x11-xkb-utils \
+    firmware-brcm80211 nvidia-smi
+```
+#### 001_install_driver_and_app*.sh 中安装的软件 :
+```sh
+sudo apt -y install lightdm i3 git vim neofetch feh resolvconf \
+    fonts-wqy-zenhei lxappearance gdebi qt4-qtconfig compton \
+    curl wget ranger volumeicon-alsa alsa-utils pulseaudio \
+    pavucontrol fonts-arphic-uming arandr xdg-utils \
+    wpasupplicant htop p7zip-full xfce4-terminal \
+    xfce4-notifyd zsh xfce4-power-manager* thunar \
+    breeze-cursor-theme file-roller pulseaudio-module-bluetooth \
+    blueman rofi xbindkeys zsh-syntax-highlighting scrot \
+    imagemagick zathura* tk parcellite network-manager network-manager-gnome \
+    mesa* gpick
+
+sudo apt -y install fcitx fcitx-data fcitx-frontend-qt4 \
+    fcitx-libs-qt fcitx-module-x11 fcitx-bin fcitx-frontend-all \
+    fcitx-frontend-qt5 fcitx-table fcitx-config-common \
+    fcitx-frontend-fbterm fcitx-libs fcitx-module-dbus \
+    fcitx-table-wubi fcitx-config-gtk fcitx-frontend-gtk2 \
+    fcitx-libs-dev fcitx-module-kimpanel fcitx-ui-classic \
+    fcitx-config-gtk2 fcitx-frontend-gtk3 fcitx-modules
+
+sudo apt -y install telegram-desktop google-chrome-stable \
+    sogoupinyin atom code numix-gtk-theme numix-icon-theme
+
+sudo apt -y install lightdm-webkit2-greeter
+
+sudo gdebi -n $workPath/osx-arc/osx-arc*.deb
+
+# gksudo Debian testing 已移除
+sudo gdebi -n $workPath/gksudoPkg/libgtop2-7*.deb
+sudo gdebi -n $workPath/gksudoPkg/libgksu2-0_2*.deb
+sudo gdebi -n $workPath/gksudoPkg/gksu_2*.deb
+
+# 以及 MPD NCMPCPP
+
+# 编译安装的软件及编译所需的依赖就不列出了 , 可以自行翻看脚本
+```
+## i3wm快捷方式(待添加)
+#
 ## 该脚本使用到的一些程序和文件来自 :
 #### [i3Gaps](https://github.com/Airblader/i3)
 #### [Polybar](https://github.com/jaagr/polybar)
