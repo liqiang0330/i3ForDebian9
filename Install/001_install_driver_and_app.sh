@@ -180,8 +180,8 @@ function installI3Gaps() {
                                   libxcb-cursor-dev libxkbcommon-dev libxcb-xinerama0-dev \
                                   libxkbcommon-x11-dev libstartup-notification0-dev \
                                   libxcb-randr0-dev libxcb-xrm0 libxcb-xrm-dev
-    # cp -rf $workPath/i3-gaps $workPath/.cache
-    git clone https://www.github.com/Airblader/i3 $workPath/.cache/i3-gaps
+    cp -rf $workPath/i3-gaps/i3-gaps.tar.gz $workPath/.cache && tar -zxvf i3-gaps.tar.gz
+    # git clone https://www.github.com/Airblader/i3 $workPath/.cache/i3-gaps
     cd $workPath/.cache/i3-gaps
     # compile & install
     autoreconf --force --install
@@ -190,7 +190,7 @@ function installI3Gaps() {
     # Disabling sanitizers is important for release versions!
     # The prefix and sysconfdir are, obviously, dependent on the distribution.
     ../configure --prefix=/usr --sysconfdir=/etc --disable-sanitizers
-    make
+    make -j8
     sudo make install
 }
 
@@ -331,7 +331,7 @@ function someConfigure() {
   sudo sed -i "31 s/^/  / " /usr/share/themes/OSX-Arc-Shadow/xfce-notify-4.0/gtkrc
   sudo sed -i '43 s/Bold/STXingkai 14/g' /usr/share/themes/OSX-Arc-Shadow/xfce-notify-4.0/gtkrc
   # 添加并配置 i3 配置文件
-  mv $HOME/.config/i3/config $HOME/.config/i3/config.bak
+  # mv $HOME/.config/i3/config $HOME/.config/i3/config.bak
   cp -rf $workPath/i3config/* $HOME/.config/i3/
   # 添加并配置 Polybar 配置文件
   cp -rf $workPath/polybarconf/* $HOME/.config/polybar/
