@@ -352,6 +352,8 @@ function someConfigure() {
   # 对于一些GUI程序无法弹出需要 gksudo的窗口,这或许会有用
   sudo sed -i '4 asession required pam_loginuid.so' /etc/pam.d/lightdm
   sudo sed -i '5 asession required pam_systemd.so' /etc/pam.d/lightdm
+  # 解除 nm-applet 显示设备未托管
+  sudo sed -i 's/^managed=false/managed=true/' /etc/NetworkManager/NetworkManager.conf
 }
 
 function main() {
