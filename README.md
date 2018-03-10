@@ -10,7 +10,24 @@ cd ~
 apt update
 apt install git
 git clone https://github.com/LimoYuan/i3ForDebian9.git
+su root
+bash i3ForDebian9/Install/000_install_sudo_bash-templetion.sh
+su youCreateUsername
+bash i3ForDebian9/Install/001_install_driver_and_app.sh
 ```
+#### 或者点击 [Download ZIP](https://github.com/LimoYuan/i3ForDebian9/archive/master.zip) , 下载到你的移动设备在tty下挂载后解压到 ~ 或者下载到手机中在同一局域网利用 ftp 软件然后 wget 到 ~ 目录
+```sh
+cd ~
+su root
+apt install unzip
+su youCreateUsername
+unzip i3ForDebian9-master.zip && mv i3ForDebian9-master i3ForDebian9
+su root
+bash i3ForDebian9/Install/000_install_sudo_bash-templetion.sh
+su youCreateUsername
+bash i3ForDebian9/Install/001_install_driver_and_app.sh
+```
+
 ### VirtualBox 安装:
 ```sh
 cd ~/i3ForDebian9/Install
