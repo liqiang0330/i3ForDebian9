@@ -63,7 +63,7 @@ nvidia-xconfig
 ## i3wm快捷方式(待添加)
 #
 ## 截图
-![Screenshots](Screenshots/2018-03-10-230200_1600x900_scrot.png)
+![Screenshots](Screenshots/2018-03-10-232235_1600x900_scrot.png)
 ![Screenshots](screenshots/2018-03-10-224117_1600x900_scrot.png)
 ![Screenshots](screenshots/2018-03-10-225632_1600x900_scrot.png)
 ![Screenshots](screenshots/2018-03-10-224909_1600x900_scrot.png)
