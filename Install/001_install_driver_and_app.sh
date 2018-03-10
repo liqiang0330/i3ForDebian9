@@ -172,22 +172,23 @@ function installI3Gaps() {
   #statements
   installCache
   # 安装依赖
-sudo apt -y install libxcb-keysyms1-dev libpango1.0-dev libxcb-util0-dev xcb \
-                                libxcb1-dev libxcb-icccm4-dev libyajl-dev libev-dev libxcb-xkb-dev \
-                                libxcb-cursor-dev libxkbcommon-dev libxcb-xinerama0-dev \
-                                libxkbcommon-x11-dev libstartup-notification0-dev \
-                                libxcb-randr0-dev libxcb-xrm0 libxcb-xrm-dev
-  cp -rf $workPath/i3-gaps $workPath/.cache
-  cd $workPath/.cache/i3-gaps
-  # compile & install
-  autoreconf --force --install
-  rm -rf build/
-  mkdir -p build && cd build/
-  # Disabling sanitizers is important for release versions!
-  # The prefix and sysconfdir are, obviously, dependent on the distribution.
-  ../configure --prefix=/usr --sysconfdir=/etc --disable-sanitizers
-  make
-  sudo make install
+  sudo apt -y install libxcb-keysyms1-dev libpango1.0-dev libxcb-util0-dev xcb \
+                                  libxcb1-dev libxcb-icccm4-dev libyajl-dev libev-dev libxcb-xkb-dev \
+                                  libxcb-cursor-dev libxkbcommon-dev libxcb-xinerama0-dev \
+                                  libxkbcommon-x11-dev libstartup-notification0-dev \
+                                  libxcb-randr0-dev libxcb-xrm0 libxcb-xrm-dev
+    # cp -rf $workPath/i3-gaps $workPath/.cache
+    git clone https://www.github.com/Airblader/i3 $workPath/.cache/i3-gaps
+    cd $workPath/.cache/i3-gaps
+    # compile & install
+    autoreconf --force --install
+    rm -rf build/
+    mkdir -p build && cd build/
+    # Disabling sanitizers is important for release versions!
+    # The prefix and sysconfdir are, obviously, dependent on the distribution.
+    ../configure --prefix=/usr --sysconfdir=/etc --disable-sanitizers
+    make
+    sudo make install
 }
 
 function installPolybar() {
@@ -301,6 +302,9 @@ function someConfigure() {
   #statements
   # 更改默认shell为zsh
   chsh -s /usr/bin/zsh
+  # 创建未重启没有自动创建的文件夹
+  mkdir -p $HOME/.config/i3
+  mkdir -p $HOME/.config/polybar
   cp -rf $workPath/.zshrc $HOME
   # 移动壁纸到家目录
   cp -rf $workPath/.wallpaper.png $HOME
@@ -339,37 +343,42 @@ function someConfigure() {
   sudo sed -i '5 asession required pam_systemd.so' /etc/pam.d/lightdm
 }
 
-# 安装需要的软件
-installApplications
-# 安装其他需要的软件
-someNeedsApplications
-# 安装 LightdmWebKit2 和 主题
-installLightdmWebKit2
-# 安装 Grub2 主题
-installGrub2Themes
-# 安装 OSX-arc GTK 主题
-installOsxArcThemes
-# 安装 OhMyZsh
-installOhMyZsh
-# 配置DNS
-configDNS
-# 安装字体
-installFonts
-# 编译安装 ProxyChains-ng
-installProxyChains
-# 安装并配置 Shadowsocksr-Python
-installShadowsocksr
-# 编译安装 i3Gaps
-installI3Gaps
-# 编译安装 Polybar
-installPolybar
-# 安装 MPD , NCMPCPP
-installMpdNcmpcpp
-# 安装 VimPlus
-installVimPluss
-# 其他配置
-someConfigure
-# 清理临时目录
-sudo rm -rf $workPath/.cache
-# 安装蓝牙驱动
-installBluetooth
+function main() {
+  #statements
+  # 安装需要的软件
+  installApplications
+  # 安装其他需要的软件
+  someNeedsApplications
+  # 安装 LightdmWebKit2 和 主题
+  installLightdmWebKit2
+  # 安装 Grub2 主题
+  installGrub2Themes
+  # 安装 OSX-arc GTK 主题
+  installOsxArcThemes
+  # 安装 OhMyZsh
+  installOhMyZsh
+  # 配置DNS
+  configDNS
+  # 安装字体
+  installFonts
+  # 编译安装 ProxyChains-ng
+  installProxyChains
+  # 安装并配置 Shadowsocksr-Python
+  installShadowsocksr
+  # 编译安装 i3Gaps
+  installI3Gaps
+  # 编译安装 Polybar
+  installPolybar
+  # 安装 MPD , NCMPCPP
+  installMpdNcmpcpp
+  # 安装 VimPlus
+  installVimPlus
+  # 其他配置
+  someConfigure
+  # 清理临时目录
+  sudo rm -rf $workPath/.cache
+  # 安装蓝牙驱动
+  installBluetooth
+}
+
+main
