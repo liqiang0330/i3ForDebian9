@@ -1,11 +1,11 @@
 {
     "server": "",
     "local_address": "127.0.0.1",
-    "local_port": ,
+    "local_port": 1088,
     "timeout": 300,
     "workers": 1,
-    "server_port": ,
-    "password": "",
+    "server_port": 34887,
+    "password": "8WgLuUM9",
     "method": "chacha20",
     "obfs": "tls1.2_ticket_auth",
     "protocol": "auth_chain_a"
