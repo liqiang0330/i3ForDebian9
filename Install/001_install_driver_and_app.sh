@@ -123,7 +123,7 @@ function installFonts() {
   mkdir -p $HOME/.config/fontconfig/conf.d
   cp -rf $workPath/fonts/fontConfig/fonts.conf $HOME/.config/fontconfig
   rm -rf $HOME/.config/fontconfig/conf.d/10-powerline-symbols.conf
-  cp -rf $workPath/fonts/fontConfig/10-powerline-symbols.conf $HOME/.config/fontconfig
+  cp -rf $workPath/fonts/fontConfig/10-powerline-symbols.conf $HOME/.config/fontconfig/conf.d
   cp -rf $workPath/fonts/Mesl* $HOME/.local/share/fonts
   cp -rf $workPath/fonts/myfonts $HOME/.local/share/fonts
   cp -rf $workPath/fonts/fontawesome $HOME/.local/share/fonts
