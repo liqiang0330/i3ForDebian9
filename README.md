@@ -64,10 +64,10 @@ nvidia-xconfig
 #
 ## 截图
 ![Screenshots](Screenshots/2018-03-10-232235_1600x900_scrot.png)
-![Screenshots](screenshots/2018-03-10-224117_1600x900_scrot.png)
-![Screenshots](screenshots/2018-03-10-225632_1600x900_scrot.png)
-![Screenshots](screenshots/2018-03-10-224909_1600x900_scrot.png)
-![Screenshots](screenshots/IMG_20180310_231447_395__01.jpg)
+![Screenshots](Screenshots/2018-03-10-224117_1600x900_scrot.png)
+![Screenshots](Screenshots/2018-03-10-225632_1600x900_scrot.png)
+![Screenshots](Screenshots/2018-03-10-224909_1600x900_scrot.png)
+![Screenshots](Screenshots/IMG_20180310_231447_395__01.jpg)
 ------
 ## 该脚本使用到的一些程序和文件来自 :
 #### [i3Gaps](https://github.com/Airblader/i3)
