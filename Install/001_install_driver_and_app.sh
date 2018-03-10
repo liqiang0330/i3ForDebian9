@@ -29,11 +29,11 @@ function installApplications() {
       fonts-wqy-zenhei lxappearance gdebi qt4-qtconfig compton \
       curl wget ranger volumeicon-alsa alsa-utils pulseaudio \
       pavucontrol fonts-arphic-uming arandr xdg-utils \
-      wpasupplicant wpagui htop p7zip-full xfce4-terminal \
+      wpasupplicant htop p7zip-full xfce4-terminal \
       xfce4-notifyd zsh xfce4-power-manager* thunar \
       breeze-cursor-theme file-roller pulseaudio-module-bluetooth \
       blueman rofi xbindkeys zsh-syntax-highlighting scrot \
-      imagemagick zathura* notify-osd tk parcellite network-manager-gnome
+      imagemagick zathura* notify-osd tk parcellite network-manager network-manager-gnome
 }
 
 function someNeedsApplications() {
@@ -52,8 +52,7 @@ function someNeedsApplications() {
       sogoupinyin atom code numix-gtk-theme numix-icon-theme
   # 卸载 dunst ,因为它与 xfce4-notifyd 会发生冲突
   # 卸载 NetworkManager
-  sudo apt -y purge dunst notification-daemon \
-      network-manager network-manager-gnome
+  sudo apt -y purge dunst notification-daemon
 }
 
 function installLightdmWebKit2() {
@@ -85,8 +84,6 @@ function installGrub2Themes() {
 function installOsxArcThemes() {
   #statements
   sudo gdebi -n $workPath/osx-arc/osx-arc*.deb
-  # 安装 numix-circle 图标
-  # sudo cp -rf $workPath/numix-icon-theme-circle/* /usr/share/icons
 }
 
 function installOhMyZsh() {
