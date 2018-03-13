@@ -160,8 +160,39 @@ sudo gdebi -n $workPath/gksudoPkg/gksu_2*.deb
 
 # 编译安装的软件及编译所需的依赖就不列出了 , 可以自行翻看脚本
 ```
-## i3wm快捷方式(待添加)
-#
+## i3wm 快捷键
+| KeyMap | Action |
+| :---: | :---: |
+| Mod | Mod4(win) |
+| Mod+Return | xfce-terminal |
+| Mod+Tab | rofi window |
+| Mod+d | rofi drun |
+| Mod+F10 | SSR Start |
+| Mod+F11 | SSR Stop |
+| Mod+F12 | SSR Restart |
+| Mod+ascfuiop90 | 1 - 10 工作区 |
+| Mod+hjkl | 切换窗口快捷键(左下上右) |
+| Mod+r (hjkl or up down left right) | 修改浮动窗口大小 |
+| Mod+space | 切换到浮动窗口之后的窗口 |
+| Mod+Shift+space | 切换窗口为浮动 / 退出浮动 |
+| Mod+Shift+ascfuiop90| 移动当前窗口到其它工作区 |
+| Mod+Shift+hjkl | 移动当前窗口在当前工作区中的位置 |
+| Mod+Shift+d | rofi run |
+| Mod+Shift+q | 自定义 rofi 电源按钮 |
+| Mod+Shift+t | 重新加载 i3 配置文件 |
+| Mod+Shift+r | 重启 i3wm |
+| Mod+Control+k | 结束当前应用窗口|
+| Mod+Control+h | 水平方向打开下一个窗口 |
+| Mod+Control+v | 垂直方向打开下一个窗口 |
+| Mod+Control+f | 切换当前窗口全屏 / 退出全屏 |
+| Mod+Control+s | 切换窗口为折叠上下布局 |
+| Mod+Control+z | 切换窗口为折叠左右布局 |
+| Mod+Control+e | 切换窗口为split方式布局,也可用来退出前两种布局 |
+| Mod+Control+l | dm-tool lock |
+| Mod+Control+c | 自定义锁屏 |
+| Mod+Control+t | Thunar |
+| workspace_auto_back_and_forth | Mod+a,Mod+s;Mod+a/s 来回切换as工作区 |
+-------
 ## 该脚本使用到的一些程序和文件来自 :
 #### [i3Gaps](https://github.com/Airblader/i3)
 #### [Polybar](https://github.com/jaagr/polybar)

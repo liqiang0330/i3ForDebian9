@@ -41,7 +41,7 @@ floating_modifier $mod
 
 # kill focused window
 # 结束当前窗口进程
-bindsym $mod+Shift+a kill
+bindsym $mod+Control+k kill
 
 # change focus
 # 设置切换窗口快捷键 h 左 j 下 k 上 l 右
@@ -67,16 +67,16 @@ bindsym $mod+Control+v split v
 
 # enter fullscreen mode for the focused container
 # 将当前窗口置为全屏
-bindsym $mod+Shift+f fullscreen toggle
+bindsym $mod+Control+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
 # 改变当前窗口的布局方式
 # 其中s为垂直方向重叠
 # z为水平方向表格模式
 # 切换 横向/纵向 布局
-bindsym $mod+Shift+s layout stacking
-bindsym $mod+Shift+z layout tabbed
-bindsym $mod+Shift+e layout toggle split
+bindsym $mod+Control+s layout stacking
+bindsym $mod+Control+z layout tabbed
+bindsym $mod+Control+e layout toggle split
 
 # toggle tiling / floating
 # 使当前窗口浮动
@@ -94,7 +94,6 @@ bindsym $mod+q focus parent
 #bindsym $mod+d focus child
 
 #scratchpad
-#显示和移动便签
 # bindsym $mod+twosuperior scratchpad show
 # bindsym $mod+Shift+twosuperior move scratchpad
 
@@ -160,7 +159,7 @@ bindsym $mod+Control+l exec dm-tool lock
 bindsym $mod+Control+c exec $HOME/.config/i3/i3lock-fancy-multimonitor/lock
 
 # 文件管理器
-bindsym $mod+Control+e exec thunar
+bindsym $mod+Control+t exec thunar
 
 # by class
 ## floatings
@@ -238,20 +237,20 @@ bindsym $mod+0 workspace $tag10
 
 # move focused container to workspace
 # 移动当前焦点窗口到其他工作区
-bindsym $mod+Shift+1 move container to workspace $tag1
-bindsym $mod+Shift+2 move container to workspace $tag2
-bindsym $mod+Shift+3 move container to workspace $tag3
-bindsym $mod+Shift+4 move container to workspace $tag4
-bindsym $mod+Shift+5 move container to workspace $tag5
-bindsym $mod+Shift+6 move container to workspace $tag6
-bindsym $mod+Shift+7 move container to workspace $tag7
-bindsym $mod+Shift+8 move container to workspace $tag8
+bindsym $mod+Shift+a move container to workspace $tag1
+bindsym $mod+Shift+s move container to workspace $tag2
+bindsym $mod+Shift+c move container to workspace $tag3
+bindsym $mod+Shift+f move container to workspace $tag4
+bindsym $mod+Shift+u move container to workspace $tag5
+bindsym $mod+Shift+i move container to workspace $tag6
+bindsym $mod+Shift+o move container to workspace $tag7
+bindsym $mod+Shift+p move container to workspace $tag8
 bindsym $mod+Shift+9 move container to workspace $tag9
 bindsym $mod+Shift+0 move container to workspace $tag10
 
 # reload the configuration file
 # 重新加载配置文件
-bindsym $mod+Shift+c reload
+bindsym $mod+Shift+t reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 # 重新启动i3，一般发生在i3升级之后
 bindsym $mod+Shift+r restart
@@ -261,10 +260,10 @@ bindsym $mod+Shift+r restart
 # resize window (you can also use the mouse for that)
 # 重设窗口大小
 mode "resize" {
-        bindsym j resize shrink width 10 px or 10 ppt
-        bindsym k resize grow height 10 px or 10 ppt
-        bindsym l resize shrink height 10 px or 10 ppt
-        bindsym m resize grow width 10 px or 10 ppt
+        bindsym h resize shrink width 10 px or 10 ppt
+        bindsym j resize grow height 10 px or 10 ppt
+        bindsym k resize shrink height 10 px or 10 ppt
+        bindsym l resize grow width 10 px or 10 ppt
 
         bindsym Left resize shrink width 10 px or 10 ppt
         bindsym Down resize grow height 10 px or 10 ppt
