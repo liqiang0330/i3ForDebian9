@@ -22,6 +22,19 @@ function installCache() {
   cd $workPath/.cache
 }
 
+function commandSuccess() {
+    if [ $1 -eq 0 ] ;then
+        print_dot 
+        echo -e "\033[32m $2 , Successful !  \033[0m"
+        print_dot 
+    else
+        print_dot 
+        echo -e "\033[31m $2 , Failed !!!  \033[0m"
+        print_dot 
+        exit
+    fi
+}
+
 function installApplications() {
   #statements
   sudo apt -y update
@@ -35,6 +48,7 @@ function installApplications() {
       blueman rofi xbindkeys zsh-syntax-highlighting scrot \
       imagemagick zathura* tk parcellite network-manager network-manager-gnome \
       mesa* gpick
+  commandSuccess $? "Base applications Installation "
 }
 
 function someNeedsApplications() {
@@ -47,10 +61,12 @@ function someNeedsApplications() {
       fcitx-table-wubi fcitx-config-gtk fcitx-frontend-gtk2 \
       fcitx-libs-dev fcitx-module-kimpanel fcitx-ui-classic \
       fcitx-config-gtk2 fcitx-frontend-gtk3 fcitx-modules
+  commandSuccess $? "Fcitx Installation "
   # 安装 telegram , Chrome , sogoupinyin , Atom , VSCode
   sudo apt -y update
   sudo apt -y install telegram-desktop google-chrome-stable \
       sogoupinyin atom code numix-gtk-theme numix-icon-theme
+  commandSuccess $? "Some needs applications Installation "
   # 卸载 dunst ,因为它与 xfce4-notifyd 会发生冲突
   # 卸载 NetworkManager
   sudo apt -y purge dunst notification-daemon
@@ -64,7 +80,8 @@ function installLightdmWebKit2() {
   sudo apt-key add - < Release.key
   sudo apt -y update
   sudo apt -y install lightdm-webkit2-greeter
-
+  commandSuccess $? "Lightdm-Web-Kit2 Installation "
+    
   # 更改默认ubuntu默认的unity-greeter为lightdm-webkit2-greeter
   sudo sed -i '/#greeter-session=example-gtk-gnome/agreeter-session=lightdm-webkit2-greeter' /etc/lightdm/lightdm.conf
   # 更换"lightdm-webkit2-greeter"主题为aether
@@ -80,11 +97,13 @@ function installGrub2Themes() {
   sudo grep "GRUB_THEME=" /etc/default/grub 2>&1 >/dev/null && sudo sed -i '/GRUB_THEME=/d' /etc/default/grub
   echo "GRUB_THEME=\"/boot/grub/themes/Vimix/theme.txt\"" | sudo tee -a /etc/default/grub
   sudo update-grub
+  commandSuccess $? "Set Grub themes "
 }
 
 function installOsxArcThemes() {
   #statements
   sudo gdebi -n $workPath/osx-arc/osx-arc*.deb
+  commandSuccess $? "Osx-arc Gtk3 Themes "
 }
 
 function installOhMyZsh() {
@@ -106,6 +125,7 @@ nameserver 223.5.5.5
 nameserver 8.8.8.8
 DNS_RESOLV_CONF
   sudo resolvconf -u &&  sudo resolvconf --enable-updates
+  commandSuccess $? "DNS setting "
 }
 
 function installFonts() {
@@ -140,6 +160,7 @@ function installFonts() {
   echo "Fonts installed , Updating font cache . "
   print_dot
   sudo fc-cache --force --verbose
+  commandSuccess $? "Fonts "
   # 生成 XDG_HOME_CONFIG
   xdg-user-dirs-update
   sudo dpkg-reconfigure locales
@@ -156,7 +177,9 @@ function installProxyChains() {
   ./configure --prefix=/usr --sysconfdir=/etc
   make
   sudo make install
+  commandSuccess $? "ProxyChains "
   sudo make install-config
+  commandSuccess $? "ProxyChains config "
   # 配置 proxychains.conf . 默认端口改为 1088 . 请自行修改为自己节点设置的端口
   sudo sed -i 's/socks4 	127.0.0.1 9050/socks5  127.0.0.1 1088/g' /etc/proxychains.conf
 }
@@ -165,8 +188,10 @@ function installShadowsocksr() {
   #statements
   sudo apt install libsodium23
   cp -rf $workPath/shadowsocksr $HOME
+  commandSuccess $? "Shadowsocksr "
   # 请自行添加名为 config.json 的配置文件到 ~/ssconfig目录中
   cp -rf $workPath/ssconfig $HOME
+  commandSuccess $? "Shadowsocksr Config "
 }
 
 function installI3Gaps() {
@@ -178,6 +203,7 @@ function installI3Gaps() {
                                   libxcb-cursor-dev libxkbcommon-dev libxcb-xinerama0-dev \
                                   libxkbcommon-x11-dev libstartup-notification0-dev \
                                   libxcb-randr0-dev libxcb-xrm0 libxcb-xrm-dev
+  commandSuccess $1 "i3Gaps needs depends Installation "
     cp -rf $workPath/i3-gaps/i3-gaps.tar.gz $workPath/.cache && tar -zxvf i3-gaps.tar.gz
     # git clone https://www.github.com/Airblader/i3 $workPath/.cache/i3-gaps
     cd $workPath/.cache/i3-gaps
@@ -190,6 +216,7 @@ function installI3Gaps() {
     ../configure --prefix=/usr --sysconfdir=/etc --disable-sanitizers
     make -j8
     sudo make install
+    commandSuccess $? "i3Gaps Installation "
 }
 
 function installPolybar() {
@@ -201,12 +228,15 @@ function installPolybar() {
       libxcb-xkb-dev pkg-config python-xcbgen xcb-proto libxcb-xrm-dev i3-wm \
       libjsoncpp-dev libasound2-dev libpulse-dev libmpdclient-dev \
       libiw-dev libcurl4-openssl-dev libxcb-cursor-dev
+  commandSuccess $? "Polybar needs depends Installation "
   cp -rf $workPath/polybar $workPath/.cache
   mkdir polybar/build
   cd polybar/build
   cmake ..
   sudo make install
+  commandSuccess $? "Polybar Installation "
   make userconfig
+  commandSuccess $? "Polybar Config Installation "
 }
 
 function installMpdNcmpcpp() {
@@ -218,6 +248,7 @@ function installMpdNcmpcpp() {
   sudo rm -rf $HOME/.mpd
   # 安装 mpd ncmpcpp
   sudo apt -y install mpd ncmpcpp
+  commandSuccess $? "Mpd and Ncmpcpp Installation "
   sudo systemctl stop mpd
   sudo systemctl disable mpd
   sudo rm -rf /etc/mpd.conf
@@ -228,6 +259,7 @@ function installMpdNcmpcpp() {
   # 移动 ncmpcpp 的配置文件到 XDG_HOME_CONFIG
   cp -rf $workPath/mpd_ncmpcpp/.ncmpcpp $HOME
   sudo usermod -aG pulse,pulse-access mpd
+  commandSuccess $? "Mpd and Ncmpcpp configure "
 }
 
 function installVimPlus() {
@@ -249,6 +281,7 @@ function installVimPlus() {
   # git clone https://github.com/VundleVim/Vundle.vim.git $HOME/.vim/bundle/Vundle.vim
   # 安装编译 YCM 所需依赖
   sudo apt-get install -y ctags build-essential cmake python-dev python3-dev vim-nox
+  commandSuccess $? "VimPlus , YCM depends Installation "
   # 解压 bundle 文件
   cd $HOME/.vim && tar -zxvf bundle.tar.gz
   # 编译安装 YCM
@@ -256,6 +289,7 @@ function installVimPlus() {
   cd $HOME/.vim/bundle/YouCompleteMe
   sudo ./install.py --clang-completer
   vim -c "PluginInstall" -c "q" -c "q"
+  commandSuccess $? "Vim Plugin Installation "
   # 改变一些文件、文件夹属组和用户关系
   who_is=$(who)
   current_user=${who_is%% *}
@@ -279,6 +313,7 @@ function installBluetooth() {
     case $action in
       y )
        sudo cp -rf $workPath/bluetooth/BCM207*.hcd /lib/firmware/brcm
+       commandSuccess $? "Bcm 94352 HMB Bluetooth device driver Installation "
        echo -e "\033[33m  Update your system , Remove not software. \033[0m"
        sudo apt -y update && sudo apt -y upgrade && sudo apt -y autoremove
        echo
@@ -308,6 +343,7 @@ function installGkSudo() {
   sudo gdebi -n $workPath/gksudoPkg/libgtop2-7*.deb
   sudo gdebi -n $workPath/gksudoPkg/libgksu2-0_2*.deb
   sudo gdebi -n $workPath/gksudoPkg/gksu_2*.deb
+  commandSuccess $? "Gksudo Installation "
 }
 
 function someConfigure() {
@@ -362,40 +398,95 @@ function someConfigure() {
 function main() {
   #statements
   # 安装需要的软件
+  print_dot
+  echo "Install base software "
+  print_dot 
   installApplications
   # 安装其他需要的软件
+  print_dot 
+  echo "Install some needs applications "
+  print_dot 
   someNeedsApplications
   # 安装 LightdmWebKit2 和 主题
+  print_dot 
+  echo "Install Lightdm-Web-Kit2 and Themes "
+  print_dot 
   installLightdmWebKit2
   # 安装 Grub2 主题
+  print_dot 
+  echo "Install Grub2 Themes "
+  print_dot 
   installGrub2Themes
   # 安装 OSX-arc GTK 主题
+  print_dot 
+  echo "Install Osx-arc Gtk3 Themes "
+  print_dot 
   installOsxArcThemes
   # 安装 OhMyZsh
+  print_dot 
+  echo "Install Oh My Zsh "
+  print_dot 
   installOhMyZsh
   # 配置DNS
+  print_dot 
+  echo "Configure DNS "
+  print_dot 
   configDNS
   # 安装字体
+  print_dot 
+  echo "Install and configure Fonts "
+  print_dot 
   installFonts
   # 编译安装 ProxyChains-ng
+  print_dot 
+  echo "Install ProxyChains "
+  print_dot 
   installProxyChains
   # 安装并配置 Shadowsocksr-Python
+  print_dot 
+  echo "Install and configure Shadowsocksr "
+  print_dot 
   installShadowsocksr
   # 编译安装 i3Gaps
+  print_dot
+  echo "Install i3Gaps "
   installI3Gaps
+  print_dot 
   # 编译安装 Polybar
+  print_dot 
+  echo "Install Polybar "
+  print_dot 
   installPolybar
   # 安装 MPD , NCMPCPP
+  print_dot 
+  echo "Install Ncmpcpp Mpd "
+  print_dot 
   installMpdNcmpcpp
   # 安装 VimPlus
+  print_dot 
+  echo "Install VimPlus "
+  print_dot 
   installVimPlus
   # 安装 gksudo 及其需要的依赖 . 由于某种原因 gksudo 被 debian testing 移除 . 但有些地方需要使用 , 故装一下
+  print_dot
+  echo "Install Gksudo "
+  print_dot 
   installGkSudo
   # 其他配置
+  print_dot 
+  echo "Start needs configure "
+  print_dot 
   someConfigure
   # 清理临时目录
+  print_dot
+  echo "Clear script WorkPath Cache "
+  print_dot 
   sudo rm -rf $workPath/.cache
+  commandSuccess $? "Clear install script Cache "
   # 安装蓝牙驱动
+  print_dot 
+  echo "Install BCM95342HMB Bluetooth device driver "
+  print_dot 
   installBluetooth
 }
 
