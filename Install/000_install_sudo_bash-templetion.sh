@@ -120,14 +120,17 @@ function installDevice() {
     # dpkg --add-architecture i386 &&
     apt -y update && apt -y install bumblebee-nvidia primus # primus-libs:i386
     commandSuccess $? "Bumblebee software Installation "
-    echo -en "\033[33m Please input you create username , It add to  bumblebee! :  \033[0m"
-    read username
+    if [ ! -n "$username" ];then
+        echo -en "\033[33m Please input you create username , It add to  bumblebee! :  \033[0m"
+        read username 
+    fi
+    print_dot 
     echo -e "\033[33m UserName : $username \033[0m"
+    print_dot 
     adduser $username bumblebee
     commandSuccess $? "Add Bumblebee group "
     # IntelGraphics=$(lspci | grep "VGA" | grep "Intel" | cut -d' ' -f 1)
     # NvidiaGraphics=$(lspci | grep "VGA" | grep "NVIDIA" | cut -d' ' -f 1)
-    # 没用还出问题
     # sed -i "/#   BusID \"PCI:01:00:0\"/a\BusID \"PCI:$IntelGraphics\"" /etc/bumblebee/xorg.conf.nouveau
     # sed -i "/#   BusID \"PCI:01:00:0\"/a\BusID \"PCI:$NvidiaGraphics\"" /etc/bumblebee/xorg.conf.nvidia
     apt -y install xserver-xorg-input-evdev \
@@ -180,7 +183,6 @@ function main() {
     print_dot 
     rm -rf $workPath
     commandSuccess $? "Clear script WorkPath Cache "
-
 }
 
 main
