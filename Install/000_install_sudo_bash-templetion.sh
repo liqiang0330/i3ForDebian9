@@ -26,11 +26,12 @@ function installCache() {
 function commandSuccess() {
     if [ $1 -eq 0 ] ;then
         print_dot 
-        echo -e "\033[32m $2 , Successful !  \033[0m"
+        echo -e "\033[32m $2  Successful !  \033[0m"
         print_dot 
+        sleep 3
     else
         print_dot 
-        echo -e "\033[31m $2 , Failed !!!  \033[0m"
+        echo -e "\033[31m $2  Failed !!!  \033[0m"
         print_dot 
         exit
     fi
@@ -148,32 +149,38 @@ function removePcspkr() {
   commandSuccess $? "Close Pcspkr "
 }
 
-# 更换软件源为 ustc
-print_dot
-echo "Configure software Source List And add DebianCN Source List "
-print_dot 
-installSourcesAndDebiancnSources
-# 安装 sudo , bash-completion . 开启 sudo 和 shell Tab 补全
-print_dot 
-echo "Install sudo bash-completion , add UserName to sudoers "
-print_dot 
-addUserToSudo
-print_dot 
-echo "Open Bash Completion "
-print_dot 
-openBashCompletion
-# 安装 X 环境 , 和一些驱动驱动
-print_dot 
-echo "Install Devices driver and Xservers "
-print_dot 
-installDevice
-# 关闭 pcspkr 警告音
-echo "Close Terminal TTY Warning tone "
-print_dot 
-removePcspkr
-# 清除临时目录 ( 当前为 root 目录下的workPath )
-print_dot 
-echo "Clear Install script temporary directory "
-print_dot 
-rm -rf $workPath
-commandSuccess $? "Clear script WorkPath Cache "
+function main() {
+    
+    # 更换软件源为 ustc
+    print_dot
+    echo "Configure software Source List And add DebianCN Source List "
+    print_dot 
+    installSourcesAndDebiancnSources
+    # 安装 sudo , bash-completion . 开启 sudo 和 shell Tab 补全
+    print_dot 
+    echo "Install sudo bash-completion , add UserName to sudoers "
+    print_dot 
+    addUserToSudo
+    print_dot 
+    echo "Open Bash Completion "
+    print_dot 
+    openBashCompletion
+    # 安装 X 环境 , 和一些驱动驱动
+    print_dot 
+    echo "Install Devices driver and Xservers "
+    print_dot 
+    installDevice
+    # 关闭 pcspkr 警告音
+    echo "Close Terminal TTY Warning tone "
+    print_dot 
+    removePcspkr
+    # 清除临时目录 ( 当前为 root 目录下的workPath )
+    print_dot 
+    echo "Clear Install script temporary directory "
+    print_dot 
+    rm -rf $workPath
+    commandSuccess $? "Clear script WorkPath Cache "
+
+}
+
+main

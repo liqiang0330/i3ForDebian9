@@ -25,11 +25,12 @@ function installCache() {
 function commandSuccess() {
     if [ $1 -eq 0 ] ;then
         print_dot 
-        echo -e "\033[32m $2 , Successful !  \033[0m"
+        echo -e "\033[32m $2  Successful !  \033[0m"
         print_dot 
+        sleep 3
     else
         print_dot 
-        echo -e "\033[31m $2 , Failed !!!  \033[0m"
+        echo -e "\033[31m $2  Failed !!!  \033[0m"
         print_dot 
         exit
     fi
@@ -76,8 +77,8 @@ function installLightdmWebKit2() {
   #statements
   installCache
   echo 'deb http://download.opensuse.org/repositories/home:/antergos/Debian_9.0/ /' | sudo tee /etc/apt/sources.list.d/home:antergos.list
-  wget -nv https://download.opensuse.org/repositories/home:antergos/Debian_9.0/Release.key -O Release.key
-  sudo apt-key add - < Release.key
+  # wget -nv https://download.opensuse.org/repositories/home:antergos/Debian_9.0/Release.key -O Release.key
+  sudo apt-key add - < $workPath/ReleaseKey/Release.key
   sudo apt -y update
   sudo apt -y install lightdm-webkit2-greeter
   commandSuccess $? "Lightdm-Web-Kit2 Installation "
