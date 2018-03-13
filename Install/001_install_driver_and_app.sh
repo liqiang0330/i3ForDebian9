@@ -27,7 +27,6 @@ function commandSuccess() {
         print_dot 
         echo -e "\033[32m $2  Successful !  \033[0m"
         print_dot 
-        sleep 3
     else
         print_dot 
         echo -e "\033[31m $2  Failed !!!  \033[0m"
@@ -80,8 +79,9 @@ function installLightdmWebKit2() {
   # wget -nv https://download.opensuse.org/repositories/home:antergos/Debian_9.0/Release.key -O Release.key
   sudo apt-key add - < $workPath/ReleaseKey/Release.key
   sudo apt -y update
-  sudo apt -y install lightdm-webkit2-greeter
-  commandSuccess $? "Lightdm-Web-Kit2 Installation "
+#  sudo apt -y install lightdm-webkit2-greeter
+  sudo gdebi -n $workPath/lightdmWebKit2Greeter/lightdm-webkit2-greeter_2.2.5-1+15.2_amd64.deb
+  commandSuccess $? "Lightdm-WebKit2-Greeter Installation "
     
   # 更改默认ubuntu默认的unity-greeter为lightdm-webkit2-greeter
   sudo sed -i '/#greeter-session=example-gtk-gnome/agreeter-session=lightdm-webkit2-greeter' /etc/lightdm/lightdm.conf

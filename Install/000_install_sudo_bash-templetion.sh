@@ -28,7 +28,6 @@ function commandSuccess() {
         print_dot 
         echo -e "\033[32m $2  Successful !  \033[0m"
         print_dot 
-        sleep 3
     else
         print_dot 
         echo -e "\033[31m $2  Failed !!!  \033[0m"
