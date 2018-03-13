@@ -170,6 +170,7 @@ function installDevice() {
         x11-utils x11-xkb-utils \
         nvidia-smi xserver-xorg-video-intel
     commandSuccess $? "Xserver BCM driver Nvidia-smi Installation "
+    sed -i 's/^PMMethod=auto/PMMethod=bbswitch/' /etc/bumblebee/bumblebee.conf
       ;;
     pc )
     print_info "Install LinuxHeaders And LinuxImage "
