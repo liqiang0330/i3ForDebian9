@@ -93,16 +93,41 @@ fi
 BASH_COMPLETION
 }
 
+function installLinuxHeadersAndLinuxImage() {
+  #statements
+  apt -y install linux-headers-$(uname -r|sed 's/[^-]*-[^-]*-//') \
+      linux-headers-$(uname -r|sed 's,[^-]*-[^-]*-,,') \
+      linux-image-$(uname -r|sed 's,[^-]*-[^-]*-,,')
+  commandSuccess $? "Linux-headers , Linux-image Installation "
+}
+
+function installBCMDeviceDriver() {
+  #statements
+  echo
+  echo -en "\033[33m You need Install BCM WIFI device driver ? ( Input y or other ) :  \033[0m"
+  read action
+  case $action in
+    y )
+    apt -y install linux-headers-$(uname -r|sed 's,[^-]*-[^-]*-,,') broadcom-sta-dkms
+    apt -y install firmware-brcm80211
+    modprobe -r b44 b43 b43legacy ssb brcmsmac bcma
+    modprobe wl
+    commandSuccess $? "BCM WIFI device driver Installation "
+      ;;
+    * )
+    exit
+      ;;
+  esac
+}
+
 function installDevice() {
   #statements
-  echo -en "\033[33m Please select install option [vir == VirtualBox ; Other == Your computer] :  \033[0m"
+  echo -en "\033[33m Please select install option [vir == VirtualBox ; in == Intel + Nvidia ; pc == Nvidia ; other == exit ] :  \033[0m"
   read option
   case $option in
     vir )
-    apt -y install linux-headers-$(uname -r|sed 's/[^-]*-[^-]*-//') \
-        linux-headers-$(uname -r|sed 's,[^-]*-[^-]*-,,') \
-        linux-image-$(uname -r|sed 's,[^-]*-[^-]*-,,')
-    commandSuccess $? "Linux-headers , Linux-image Installation "
+    print_info "Install LinuxHeaders And LinuxImage "
+    installLinuxHeadersAndLinuxImage
     apt -y install xserver-xorg-input-evdev \
         xserver-xorg-input-kbd \
         xserver-xorg-input-mouse \
@@ -118,14 +143,10 @@ function installDevice() {
     ./VBoxLinuxAdditions.run
     commandSuccess $? "VBoxLinuxAdditions Installation "
       ;;
-    * )
-    apt -y install linux-image-$(uname -r|sed 's,[^-]*-[^-]*-,,') \
-        linux-headers-$(uname -r|sed 's,[^-]*-[^-]*-,,') broadcom-sta-dkms
-    modprobe -r b44 b43 b43legacy ssb brcmsmac bcma
-    modprobe wl
-    commandSuccess $? "BCM WIFI device driver Installation "
-    apt -y install linux-headers-$(uname -r|sed 's/[^-]*-[^-]*-//') \
-        linux-headers-$(uname -r|sed 's/[^-]*-[^-]*-//') nvidia-driver
+    in )
+    print_info "Install LinuxHeaders And LinuxImage "
+    installLinuxHeadersAndLinuxImage
+    apt -y install linux-headers-$(uname -r|sed 's/[^-]*-[^-]*-//') nvidia-driver
     # 不开i386了, 没啥用得到的
     # dpkg --add-architecture i386 &&
     apt -y update && apt -y install bumblebee-nvidia primus # primus-libs:i386
@@ -147,8 +168,26 @@ function installDevice() {
         xserver-xorg-input-synaptics \
         x11-xserver-utils \
         x11-utils x11-xkb-utils \
-        firmware-brcm80211 nvidia-smi
+        nvidia-smi xserver-xorg-video-intel
     commandSuccess $? "Xserver BCM driver Nvidia-smi Installation "
+      ;;
+    pc )
+    print_info "Install LinuxHeaders And LinuxImage "
+    installLinuxHeadersAndLinuxImage
+    apt -y install linux-headers-$(uname -r|sed 's/[^-]*-[^-]*-//') nvidia-driver
+    commandSuccess $? "Nvidia driver Installation "
+    apt -y install xserver-xorg-input-evdev \
+        xserver-xorg-input-kbd \
+        xserver-xorg-input-mouse \
+        xserver-xorg-input-synaptics \
+        x11-xserver-utils \
+        x11-utils x11-xkb-utils \
+        nvidia-smi nvidia-xconfig
+    commandSuccess $? "Xserver BCM driver Nvidia-smi Installation "
+    nvidia-xconfig
+      ;;
+    * )
+    exit
       ;;
   esac
 }
@@ -173,6 +212,8 @@ function main() {
     # 安装 X 环境 , 和一些驱动驱动
     print_info "Install Devices driver and Xservers "
     installDevice
+    print_info "Install BCM Devices driver "
+    installBCMDeviceDriver
     # 关闭 pcspkr 警告音
     print_info "Close Terminal TTY Warning tone "
     removePcspkr
