@@ -341,6 +341,9 @@ function someConfigure() {
   # 添加并配置 i3 配置文件
   # mv $HOME/.config/i3/config $HOME/.config/i3/config.bak
   cp -rf $workPath/i3config/* $HOME/.config/i3/
+  # 给 i3 第一个工作区分配显示器
+  DIS_MONITOR=$(xrandr | grep "connected primary [0-9]" | cut -d' ' -f 1)
+  sed -i "/# workspace \$tag1 output LVDS-1/iworkspace \$tag1 output $DIS_MONITOR" $HOME/.config/i3/config
   # 添加并配置 Polybar 配置文件
   cp -rf $workPath/polybarconf/* $HOME/.config/polybar/
   # qt4 配置文件
@@ -349,7 +352,7 @@ function someConfigure() {
   cp -rf $workPath/gtk-2.0 $HOME/.config
   cp -rf $workPath/gtk-3.0 $HOME/.config
   cp -rf $workPath/.gtkrc-2.0 $HOME
-  # 对于一些GUI程序无法弹出需要 gksudo的窗口,这或许会有用
+  # 对于一些GUI程序无法弹出需要 gksudo的窗口,这或许有用
   sudo sed -i '4 asession required pam_loginuid.so' /etc/pam.d/lightdm
   sudo sed -i '5 asession required pam_systemd.so' /etc/pam.d/lightdm
   # 解除 nm-applet 显示设备未托管

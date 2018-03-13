@@ -44,53 +44,39 @@ floating_modifier $mod
 bindsym $mod+Shift+a kill
 
 # change focus
-# 设置切换窗口快捷键 j m 左右 l k 上下
-bindsym $mod+j focus left
-bindsym $mod+k focus down
-bindsym $mod+l focus up
-bindsym $mod+m focus right
-
-# alternatively, you can use the cursor keys:
-# 使用键盘预设方向键切换窗口
-# bindsym $mod+Left focus left
-# bindsym $mod+Down focus down
-# bindsym $mod+Up focus up
-# bindsym $mod+Right focus right
+# 设置切换窗口快捷键 h 左 j 下 k 上 l 右
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
 
 # move focused window
 # 移动当前窗口在当前工作区中的位置
-bindsym $mod+Shift+j move left
-bindsym $mod+Shift+k move down
-bindsym $mod+Shift+l move up
-bindsym $mod+Shift+m move right
-
-# alternatively, you can use the cursor keys:
-# 跟上面一样
-bindsym $mod+Shift+Left move left
-bindsym $mod+Shift+Down move down
-bindsym $mod+Shift+Up move up
-bindsym $mod+Shift+Right move right
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
 
 # split in horizontal orientation
 # 下一个打开的窗口为水平方向
-bindsym $mod+h split h
+bindsym $mod+Control+h split h
 
 # split in vertical orientation
 # 下一个打开的窗口为垂直方向
-bindsym $mod+v split v
+bindsym $mod+Control+v split v
 
 # enter fullscreen mode for the focused container
 # 将当前窗口置为全屏
-bindsym $mod+f fullscreen toggle
+bindsym $mod+Shift+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
 # 改变当前窗口的布局方式
 # 其中s为垂直方向重叠
 # z为水平方向表格模式
 # 切换 横向/纵向 布局
-bindsym $mod+s layout stacking
-bindsym $mod+z layout tabbed
-bindsym $mod+e layout toggle split
+bindsym $mod+Shift+s layout stacking
+bindsym $mod+Shift+z layout tabbed
+bindsym $mod+Shift+e layout toggle split
 
 # toggle tiling / floating
 # 使当前窗口浮动
@@ -141,10 +127,8 @@ exec --no-startup-id i3-msg 'exec mpd'
 exec --no-startup-id i3-msg 'exec parcellite'
 exec --no-startup-id i3-msg 'exec xbindkeys'
 exec --no-startup-id i3-msg 'exec xfce4-power-manager'
-# exec --no-startup-id i3-msg 'workspace $tag1; exec google-chrome &'
+exec --no-startup-id i3-msg 'exec google-chrome &'
 exec --no-startup-id i3-msg 'workspace $tag2; exec xfce4-terminal'
-# exec --no-startup-id i3-msg 'workspace $tag4; exec termite -e "screen -rd weechat &"; workspace $tag2'
-# exec --no-startup-id i3-msg 'workspace $tag10; exec termite -e "glances"; workspace $tag2'
 
 #colors
 #颜色
@@ -180,22 +164,43 @@ bindsym $mod+Control+e exec thunar
 
 # by class
 ## floatings
-# 指定软件默认以浮动状态打开
-# for_window [class="Cssh"] floating enable, border normal
-for_window [class="vim"] floating enable, border normal
-# for_window [class="XTerm"] floating enable, border normal
-for_window [class="feh"] floating enable, border normal
-for_window [class="telegram-desktop"] floating enable, border normal
+# "class" 遵循 "WM_CLASS" ; 可以使用 xprop| grep -i "class" 来查询你需要浮动显示的软件的 WM_CLASS
+# 指定软件默认以浮动状态打开, 边框可选样式 : normal none pixel
+for_window [class="feh"] floating enable, border none
+for_window [class="TelegramDesktop"] floating enable, border none
+for_window [class="Thunar"] floating enable, border none
+for_window [class="Pavucontrol"] floating enable, border none
+for_window [class="Fcitx-config-gtk3"] floating enable, border none
+for_window [class="Lxappearance"] floating enable, border none
+for_window [class="Nvidia-settings"] floating enable, border none
+for_window [class="Xfce4-notifyd-config"] floating enable, border none
+for_window [class="Blueman-adapters"] floating enable, border none
+for_window [class="Blueman-manager"] floating enable, border none
+for_window [class="File-roller"] floating enable, border none
+for_window [class="Display-im6.q16"] floating enable, border none
+for_window [class="Gpick"] floating enable, border none
+for_window [class="Xfce4-power-manager-settings"] floating enable, border none
+for_window [class="GParted"] floating enable, border none
+for_window [class="Gdebi-gtk"] floating enable, border none
+for_window [class="Arandr"] floating enable, border none
+for_window [class="Nm-connection-editor"] floating enable, border none
+for_window [class="Qtconfig-qt4"] floating enable, border none
+# 浮动窗口最大值
+floating_maximum_size 1600 x 900
 # assigns focus
 # 给工作区分配图标/焦点？
+
+assign [class="Atom"] $tag3
+for_window [class="Atom"] focus
+
 assign [class="Code"] $tag3
 for_window [class="Code"] focus
 
-assign [class="telegramdesktop"] $tag5
-for_window [class="telegramdesktop"] focus
+assign [class="TelegramDesktop"] $tag5
+for_window [class="TelegramDesktop"] focus
 
-assign [class="ncmpcpp"] $tag9
-for_window [class="ncmpcpp"] focus
+assign [class="Google-chrome"] $tag1
+# for_window [class="Google-chrome"] focus
 
 #toggle workspace's display screen
 #切换工作区的显示屏幕
@@ -204,8 +209,8 @@ bindsym $mod+Shift+minus move workspace to output up
 
 
 #assign workspace to screens
-#给工作区分配屏幕
-workspace $tag1 output LVDS-1
+#给工作区分配显示器
+# workspace $tag1 output LVDS-1
 # workspace $tag2 output HDMI-1
 # workspace $tag3 output eDP-1
 # workspace $tag4 output eDP-1
@@ -220,14 +225,14 @@ workspace $tag1 output LVDS-1
 
 # switch to workspace
 # 切换到工作区
-bindsym $mod+1 workspace $tag1
-bindsym $mod+2 workspace $tag2
-bindsym $mod+3 workspace $tag3
-bindsym $mod+4 workspace $tag4
-bindsym $mod+5 workspace $tag5
-bindsym $mod+6 workspace $tag6
-bindsym $mod+7 workspace $tag7
-bindsym $mod+8 workspace $tag8
+bindsym $mod+a workspace $tag1
+bindsym $mod+s workspace $tag2
+bindsym $mod+c workspace $tag3
+bindsym $mod+f workspace $tag4
+bindsym $mod+u workspace $tag5
+bindsym $mod+i workspace $tag6
+bindsym $mod+o workspace $tag7
+bindsym $mod+p workspace $tag8
 bindsym $mod+9 workspace $tag9
 bindsym $mod+0 workspace $tag10
 
