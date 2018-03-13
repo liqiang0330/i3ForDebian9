@@ -203,7 +203,7 @@ function installI3Gaps() {
                                   libxcb-cursor-dev libxkbcommon-dev libxcb-xinerama0-dev \
                                   libxkbcommon-x11-dev libstartup-notification0-dev \
                                   libxcb-randr0-dev libxcb-xrm0 libxcb-xrm-dev
-  commandSuccess $1 "i3Gaps needs depends Installation "
+  commandSuccess $? "i3Gaps needs depends Installation "
     cp -rf $workPath/i3-gaps/i3-gaps.tar.gz $workPath/.cache && tar -zxvf i3-gaps.tar.gz
     # git clone https://www.github.com/Airblader/i3 $workPath/.cache/i3-gaps
     cd $workPath/.cache/i3-gaps
@@ -229,7 +229,8 @@ function installPolybar() {
       libjsoncpp-dev libasound2-dev libpulse-dev libmpdclient-dev \
       libiw-dev libcurl4-openssl-dev libxcb-cursor-dev
   commandSuccess $? "Polybar needs depends Installation "
-  cp -rf $workPath/polybar $workPath/.cache
+  cp -rf $workPath/polybar/polybar.tar.gz $workPath/.cache
+  tar -zxvf polybar.tar.gz 
   mkdir polybar/build
   cd polybar/build
   cmake ..
