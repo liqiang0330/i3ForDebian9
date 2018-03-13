@@ -63,7 +63,7 @@ function installApplications() {
       breeze-cursor-theme file-roller pulseaudio-module-bluetooth \
       blueman rofi xbindkeys zsh-syntax-highlighting scrot \
       imagemagick zathura* tk parcellite network-manager network-manager-gnome \
-      mesa* gpick
+      mesa* gpick menulibre
   commandSuccess $? "Base applications Installation "
 }
 
@@ -396,8 +396,8 @@ function someConfigure() {
   # mv $HOME/.config/i3/config $HOME/.config/i3/config.bak
   cp -rf $workPath/i3config/* $HOME/.config/i3/
   # 给 i3 第一个工作区分配显示器
-  DIS_MONITOR=$(xrandr | grep "connected primary [0-9]" | cut -d' ' -f 1)
-  sed -i "/# workspace \$tag1 output LVDS-1/iworkspace \$tag1 output $DIS_MONITOR" $HOME/.config/i3/config
+#  DIS_MONITOR=$(xrandr | grep "connected primary [0-9]" | cut -d' ' -f 1)
+#  sed -i "/# workspace \$tag1 output LVDS-1/iworkspace \$tag1 output $DIS_MONITOR" $HOME/.config/i3/config
   # 添加并配置 Polybar 配置文件
   cp -rf $workPath/polybarconf/* $HOME/.config/polybar/
   # qt4 配置文件
