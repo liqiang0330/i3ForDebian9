@@ -4,12 +4,27 @@ workPath="$HOME/i3ForDebian9"
 function print_dot() {
   #statements
   echo
-  for (( i = 0; i < 50; i++ )); do
+  for (( i = 0; i < 80; i++ )); do
     #statements
-    echo -n "*"
+    echo -en "\033[33m*\033[0m"
   done
   echo
   echo
+}
+
+function print_dash() {
+    echo
+    for (( i = 0; i < 80; i++ )); do
+        echo -en "\033[33m-\033[0m"
+    done
+    echo
+    echo
+}
+
+function print_info() {
+    print_dot
+    echo "$1"
+    print_dot
 }
 
 # 创建脚本工作时的临时目录
@@ -25,13 +40,13 @@ function installCache() {
 
 function commandSuccess() {
     if [ $1 -eq 0 ] ;then
-        print_dot 
+        print_dash
         echo -e "\033[32m $2  Successful !  \033[0m"
-        print_dot 
+        print_dash
     else
-        print_dot 
+        print_dash
         echo -e "\033[31m $2  Failed !!!  \033[0m"
-        print_dot 
+        print_dash
         exit
     fi
 }
@@ -39,9 +54,7 @@ function commandSuccess() {
 function installSourcesAndDebiancnSources() {
   #statements
   installCache
-  print_dot
-  echo "Replace apt sources list to << USTC >> for china. And update upgrade Your system."
-  print_dot
+  print_info "Replace apt sources list to << USTC >> for china. And update upgrade Your system."
   wget -c https://mirrors.ustc.edu.cn/repogen/conf/debian-https-4-buster -O sources.list
   cp -rf sources.list /etc/apt/
   chmod 644 /etc/apt/sources.list
@@ -56,16 +69,14 @@ function installSourcesAndDebiancnSources() {
 
 function addUserToSudo() {
   #statements
-  print_dot
-  echo -e "\033[31m Install sudo , bash-completion , x11 . Add username to sudoers , open Shell Tab completion . \033[0m"
-  print_dot
+  print_info "Install sudo , bash-completion , x11 . Add username to sudoers , open Shell Tab completion ."
   apt -y update
   apt -y install sudo bash-completion
   commandSuccess $? "Sudo And Bash-completion Installation"
   echo -en "\033[33m Please input you create username :  \033[0m"
   read username
   # sed "20 a$username    ALL=(ALL:ALL) ALL" -i /etc/sudoers
-    sed -i "/root	ALL=(ALL:ALL) ALL/a$username	ALL=(ALL:ALL) ALL" /etc/sudoers
+  sed -i "/root	ALL=(ALL:ALL) ALL/a$username	ALL=(ALL:ALL) ALL" /etc/sudoers
 }
 
 function openBashCompletion() {
@@ -104,7 +115,7 @@ function installDevice() {
     commandSuccess $? "Xserver ... Installation "
     apt -y install build-essential make perl
     mount /dev/sr0 /mnt/ && cd /mnt
-    ./VBoxLinuxAdditions.run 
+    ./VBoxLinuxAdditions.run
     commandSuccess $? "VBoxLinuxAdditions Installation "
       ;;
     * )
@@ -121,11 +132,9 @@ function installDevice() {
     commandSuccess $? "Bumblebee software Installation "
     if [ ! -n "$username" ];then
         echo -en "\033[33m Please input you create username , It add to  bumblebee! :  \033[0m"
-        read username 
+        read username
     fi
-    print_dot 
-    echo -e "\033[33m UserName : $username \033[0m"
-    print_dot 
+    print_info "UserName : $username "
     adduser $username bumblebee
     commandSuccess $? "Add Bumblebee group "
     # IntelGraphics=$(lspci | grep "VGA" | grep "Intel" | cut -d' ' -f 1)
@@ -152,34 +161,23 @@ function removePcspkr() {
 }
 
 function main() {
-    
+
     # 更换软件源为 ustc
-    print_dot
-    echo "Configure software Source List And add DebianCN Source List "
-    print_dot 
+    print_info "Configure software Source List And add DebianCN Source List "
     installSourcesAndDebiancnSources
     # 安装 sudo , bash-completion . 开启 sudo 和 shell Tab 补全
-    print_dot 
-    echo "Install sudo bash-completion , add UserName to sudoers "
-    print_dot 
+    print_info "Install sudo bash-completion , add UserName to sudoers "
     addUserToSudo
-    print_dot 
-    echo "Open Bash Completion "
-    print_dot 
+    print_info "Open Bash Completion "
     openBashCompletion
     # 安装 X 环境 , 和一些驱动驱动
-    print_dot 
-    echo "Install Devices driver and Xservers "
-    print_dot 
+    print_info "Install Devices driver and Xservers "
     installDevice
     # 关闭 pcspkr 警告音
-    echo "Close Terminal TTY Warning tone "
-    print_dot 
+    print_info "Close Terminal TTY Warning tone "
     removePcspkr
     # 清除临时目录 ( 当前为 root 目录下的workPath )
-    print_dot 
-    echo "Clear Install script temporary directory "
-    print_dot 
+    print_info "Clear Install script temporary directory "
     rm -rf $workPath
     commandSuccess $? "Clear script WorkPath Cache "
 }

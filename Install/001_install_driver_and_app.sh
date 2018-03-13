@@ -4,13 +4,29 @@ workPath="$HOME/i3ForDebian9"
 function print_dot() {
   #statements
   echo
-  for (( i = 0; i < 50; i++ )); do
+  for (( i = 0; i < 80; i++ )); do
     #statements
-    echo -n "*"
+    echo -en "\033[33m*\033[0m"
   done
   echo
   echo
 }
+
+function print_dash() {
+    echo
+    for (( i = 0; i < 80; i++ )); do
+        echo -en "\033[33m-\033[0m"
+    done
+    echo
+    echo
+}
+
+function print_info() {
+    print_dot
+    echo "$1"
+    print_dot
+}
+
 # 创建脚本工作时的临时目录
 function installCache() {
   #statements
@@ -24,13 +40,13 @@ function installCache() {
 
 function commandSuccess() {
     if [ $1 -eq 0 ] ;then
-        print_dot 
+        print_dash
         echo -e "\033[32m $2  Successful !  \033[0m"
-        print_dot 
+        print_dash
     else
-        print_dot 
+        print_dash
         echo -e "\033[31m $2  Failed !!!  \033[0m"
-        print_dot 
+        print_dash
         exit
     fi
 }
@@ -82,7 +98,7 @@ function installLightdmWebKit2() {
 #  sudo apt -y install lightdm-webkit2-greeter
   sudo gdebi -n $workPath/lightdmWebKit2Greeter/lightdm-webkit2-greeter_2.2.5-1+15.2_amd64.deb
   commandSuccess $? "Lightdm-WebKit2-Greeter Installation "
-    
+
   # 更改默认ubuntu默认的unity-greeter为lightdm-webkit2-greeter
   sudo sed -i '/#greeter-session=example-gtk-gnome/agreeter-session=lightdm-webkit2-greeter' /etc/lightdm/lightdm.conf
   # 更换"lightdm-webkit2-greeter"主题为aether
@@ -157,9 +173,7 @@ function installFonts() {
   sudo chmod 644 /etc/fonts/conf.avail/66-noto*
   sudo chown root:root /etc/fonts/conf.avail/66-noto*
   # 更新字体缓存
-  print_dot
-  echo "Fonts installed , Updating font cache . "
-  print_dot
+  print_info "Fonts installed , Updating font cache . "
   sudo fc-cache --force --verbose
   commandSuccess $? "Fonts "
   # 生成 XDG_HOME_CONFIG
@@ -230,8 +244,13 @@ function installPolybar() {
       libjsoncpp-dev libasound2-dev libpulse-dev libmpdclient-dev \
       libiw-dev libcurl4-openssl-dev libxcb-cursor-dev
   commandSuccess $? "Polybar needs depends Installation "
+  print_info "Due to upstream xcbgen issues , Need xcbgen <= 12.1 , Now remove xcbgen >= 12.1 version . Install xcbgen <= 12.1 deb ."
+  sudo apt -y remove --purge python-xcbgen xcb-proto
+  commandSuccess $? "Xcbgen >= 13.1 removed . "
+  sudo gdebi -n $workPath/polybar/xcb-proto_1.12-1_all.deb && sudo gdebi -n $workPath/polybar/python-xcbgen_1.12-1_all.deb
+  commandSuccess $? "Xcbgen <= 12.1 Installed . "
   cp -rf $workPath/polybar/polybar.tar.gz $workPath/.cache
-  tar -zxvf polybar.tar.gz 
+  tar -zxvf polybar.tar.gz
   mkdir polybar/build
   cd polybar/build
   cmake ..
@@ -309,7 +328,8 @@ function installVimPlus() {
 function installBluetooth() {
   #statements
   # 安装蓝牙驱动,这不适合所有用户
-    echo -e "\033[33m Install Bluetooth driver , Only applies to BCM94352HMB device. \033[0m"
+    print_info "Install Bluetooth driver , Only applies to BCM94352HMB device."
+    echo
     echo -en "\033[33m Your Bluetooth device is BCM94352HMB ? Input:  ( y or other ) \033[0m"
     read action
     case $action in
@@ -319,9 +339,7 @@ function installBluetooth() {
        echo -e "\033[33m  Update your system , Remove not software. \033[0m"
        sudo apt -y update && sudo apt -y upgrade && sudo apt -y autoremove
        echo
-       echo
-       echo -e "\033[33m  Install script is successful . 5 sec after Reboot system. \033[0m"
-       echo
+       print_info "Install script is successful . 5 sec after Reboot system."
        echo
        sleep 5
        sudo reboot
@@ -330,9 +348,7 @@ function installBluetooth() {
       echo -e "\033[33m  Update your system , Remove not software. \033[0m"
       sudo apt -y update && sudo apt -y upgrade && sudo apt -y autoremove
       echo
-      echo
-      echo -e "\033[33m  Install script is successful . 5 sec after Reboot system. \033[0m"
-      echo
+      print_info "Install script is successful . 5 sec after Reboot system."
       echo
       sleep 5
       sudo reboot
@@ -400,95 +416,59 @@ function someConfigure() {
 function main() {
   #statements
   # 安装需要的软件
-  print_dot
-  echo "Install base software "
-  print_dot 
+  print_info "Install base software "
   installApplications
   # 安装其他需要的软件
-  print_dot 
-  echo "Install some needs applications "
-  print_dot 
+  print_info "Install some needs applications "
   someNeedsApplications
   # 安装 LightdmWebKit2 和 主题
-  print_dot 
-  echo "Install Lightdm-Web-Kit2 and Themes "
-  print_dot 
+  print_info "Install Lightdm-Web-Kit2 and Themes "
   installLightdmWebKit2
   # 安装 Grub2 主题
-  print_dot 
-  echo "Install Grub2 Themes "
-  print_dot 
+  print_info "Install Grub2 Themes "
   installGrub2Themes
   # 安装 OSX-arc GTK 主题
-  print_dot 
-  echo "Install Osx-arc Gtk3 Themes "
-  print_dot 
+  print_info "Install Osx-arc Gtk3 Themes "
   installOsxArcThemes
   # 安装 OhMyZsh
-  print_dot 
-  echo "Install Oh My Zsh "
-  print_dot 
+  print_info "Install Oh My Zsh "
   installOhMyZsh
   # 配置DNS
-  print_dot 
-  echo "Configure DNS "
-  print_dot 
+  print_info "Configure DNS "
   configDNS
   # 安装字体
-  print_dot 
-  echo "Install and configure Fonts "
-  print_dot 
+  print_info "Install and configure Fonts "
   installFonts
   # 编译安装 ProxyChains-ng
-  print_dot 
-  echo "Install ProxyChains "
-  print_dot 
+  print_info "Install ProxyChains "
   installProxyChains
   # 安装并配置 Shadowsocksr-Python
-  print_dot 
-  echo "Install and configure Shadowsocksr "
-  print_dot 
+  print_info "Install and configure Shadowsocksr "
   installShadowsocksr
   # 编译安装 i3Gaps
-  print_dot
-  echo "Install i3Gaps "
+  print_info "Install i3Gaps "
   installI3Gaps
-  print_dot 
   # 编译安装 Polybar
-  print_dot 
-  echo "Install Polybar "
-  print_dot 
+  print_info "Install Polybar "
   installPolybar
   # 安装 MPD , NCMPCPP
-  print_dot 
-  echo "Install Ncmpcpp Mpd "
-  print_dot 
+  print_info "Install Ncmpcpp Mpd "
   installMpdNcmpcpp
   # 安装 VimPlus
-  print_dot 
-  echo "Install VimPlus "
-  print_dot 
+  print_info "Install VimPlus "
   installVimPlus
   # 安装 gksudo 及其需要的依赖 . 由于某种原因 gksudo 被 debian testing 移除 . 但有些地方需要使用 , 故装一下
-  print_dot
-  echo "Install Gksudo "
-  print_dot 
+  print_info "Install Gksudo "
   installGkSudo
   # 其他配置
-  print_dot 
-  echo "Start needs configure "
-  print_dot 
+  print_info "Start needs configure "
   someConfigure
   # 清理临时目录
-  print_dot
-  echo "Clear script WorkPath Cache "
-  print_dot 
+  print_info "Clear script WorkPath Cache "
   sudo rm -rf $workPath/.cache
   commandSuccess $? "Clear install script Cache "
   # 安装蓝牙驱动
-  print_dot 
-  echo "Install BCM95342HMB Bluetooth device driver "
-  print_dot 
+  print_info "Install BCM95342HMB Bluetooth device driver "
   installBluetooth
 }
 
