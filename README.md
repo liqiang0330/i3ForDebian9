@@ -1,5 +1,8 @@
 # i3 For Debian9 Testing 备份
 ------
+#### 新手 , 代码很烂 . 不过能跑(权当个人备份) ....
+#### i3ForUbuntu16.04 将会删除, 不再更新 .
+
 ## 安装方式
 
 #### 最小化安装 Debian9 Testing , [官方NetBootNonFreeWeeklyISO镜像](https://cdimage.debian.org/cdimage/unofficial/non-free/cd-including-firmware/weekly-builds/amd64/iso-cd/)
