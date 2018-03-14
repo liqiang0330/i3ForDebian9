@@ -39,8 +39,7 @@ bash ./001_install_driver_and_app.sh
 bash ./000_install_sudo_bash-templetion.sh
 # 输入你创建的用户名之后 , 会看到这个提示 Please select install option [vir == VirtualBox ; in == Intel + Nvidia ; pc == Nvidia ; other == exit 对应功能见下面表格
 # 需要注意的是 pc 选项没有经过测试 .....
-# 同样需要注意的时 , 如果VirtualBox 安装成功重启后 , 如果登录界面黑屏直接输入密码回车即可进入桌面 , \
-    猜测是因为没有使用独立显卡启动虚拟机的原因 . 其中 Compton 无法透明也可能是相同原因, 只在虚拟机上出现
+# 同样需要注意的时 , 如果VirtualBox 安装成功重启后 , 如果登录界面黑屏直接输入密码回车即可进入桌面 , 猜测是因为没有使用独立显卡启动虚拟机的原因 . 其中 Compton 无法透明也可能是相同原因, 只在虚拟机上出现
 ```
 | 选项 | 对应设备 |
 | :---: | :---: |
@@ -57,8 +56,7 @@ cd ~/i3ForDebian9/Install
 su root
 # 执行 000_install_sudo_bash-templetion.sh
 ./000_install_sudo_bash-templetion.sh
-# 看到 tty 提示 Please select install option 时 ,\
-    根据提示输入 vir ( VirtualBox ) in (I + N 双显卡笔记本); pc ( Nvidia 单显卡台式或者笔记本 ) 具体请看上方表格
+# 看到 tty 提示 Please select install option 时 ,根据提示输入 vir ( VirtualBox ) in (I + N 双显卡笔记本); pc ( Nvidia 单显卡台式或者笔记本 ) 具体请看上方表格
 # 安装过程中需要输入你创建的普通用户账号 , 具体看到提示后操作
 # 000 脚本安装完成后 , 切换到你创建的普通用户
 su youCreateUsername #你创建的普通用户
@@ -77,7 +75,7 @@ su youCreateUsername #你创建的普通用户
 ![Screenshots](Screenshots/2018-03-11-000800_1600x900_scrot.png)
 ------
 
-## 脚本中安装的所有软件包
+## 脚本中安装的所有软件包 ( 可能会有增加, 具体请参考脚本 )
 #### 000_install_sudo_*.sh 中安装的软件 :
 ```sh
 debiancn-keyring.deb # Debiancn 源
