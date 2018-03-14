@@ -22,21 +22,38 @@ su root
 apt install unzip
 su youCreateUsername
 unzip i3ForDebian9-master.zip && mv i3ForDebian9-master i3ForDebian9
+cd i3ForDebian9/Install
 su root
-bash i3ForDebian9/Install/000_install_sudo_bash-templetion.sh
+bash ./000_install_sudo_bash-templetion.sh
 su youCreateUsername
-bash i3ForDebian9/Install/001_install_driver_and_app.sh
+bash ./001_install_driver_and_app.sh
 ```
-
-### VirtualBox 安装:
+## 安装支持
 ```sh
+# 执行 000 脚本后
+bash ./000_install_sudo_bash-templetion.sh
+# 输入你创建的用户名之后 , 会看到这个提示 Please select install option [vir == VirtualBox ; in == Intel + Nvidia ; pc == Nvidia ; other == exit 对应功能见下面表格
+# 需要注意的是 pc 选项没有经过测试 .....
+# 同样需要注意的时 , 如果VirtualBox 安装成功重启后 , 如果登录界面黑屏直接输入密码回车即可进入桌面 , \
+    猜测是因为没有使用独立显卡启动虚拟机的原因 . 其中 Compton 无法透明也可能是相同原因, 只在虚拟机上出现
+```
+| 选项 | 对应设备 |
+| :---: | :---: |
+| vir | VirtualBox 虚拟机 |
+| in | Intel + Nvidia 双显卡笔记本 |
+| pc | 单 Nvidia 显卡电脑 or 笔记本 |
+| other | 退出安装脚本 |
+### 详细安装方式:
+```sh
+# 克隆或解压到普通用户$HOME目录后
 cd ~/i3ForDebian9/Install
-# 点击虚拟机的安装增强功能后继续
+# 如果是 VirtualBox 虚拟机 , 请务必点击虚拟机的安装增强功能后方可继续 . 如果不是请忽略 .
 # 切换到 root 用户
 su root
 # 执行 000_install_sudo_bash-templetion.sh
 ./000_install_sudo_bash-templetion.sh
-# 看到 tty 提示 Please select install option [vir == VirtualBox ; Other == Your computer] 时 , 输入 vir
+# 看到 tty 提示 Please select install option 时 ,\
+    根据提示输入 vir ( VirtualBox ) in (I + N 双显卡笔记本); pc ( Nvidia 单显卡台式或者笔记本 ) 具体请看上方表格
 # 安装过程中需要输入你创建的普通用户账号 , 具体看到提示后操作
 # 000 脚本安装完成后 , 切换到你创建的普通用户
 su youCreateUsername #你创建的普通用户
@@ -45,37 +62,6 @@ su youCreateUsername #你创建的普通用户
 # 安装过程中需要你输入一些信息 , 请按提示输入
 # 001 脚本中会安装 OhMyZsh , OhMyZsh 安装后会自动进入 zsh , 请输入 exit 退出后继续
 # 脚本安装完成会自动重启
-```
-### Intel + NVIDIA 双显卡笔记本安装
-#### 安装步骤同上 , 区别是看到 tty 提示 Please select install option [vir == VirtualBox ; Other == Your computer] 时 , 输入其他字符或者直接回车
-#### 暂时只支持这两种安装方式 , 对于NVIDIA 单显卡用户 , 只需修改 000 中安装显卡驱动部分
-```sh
-# 这几行是为 BCM 无线网卡模块需要的代码 , 如果你不是 BCM 无线网卡 , 请注释掉这几行
-#############################
-# apt -y install linux-image-$(uname -r|sed 's,[^-]*-[^-]*-,,') linux-headers-$(uname -r|sed 's,[^-]*-[^-]*-,,') broadcom-sta-dkms
-# modprobe -r b44 b43 b43legacy ssb brcmsmac bcma
-# modprobe wl
-#
-############################
-apt -y install linux-headers-$(uname -r|sed 's/[^-]*-[^-]*-//') linux-headers-$(uname -r|sed 's/[^-]*-[^-]*-//') nvidia-driver
-# 单 NVIDIA 显卡 , 只需要注释下面这几行
-# dpkg --add-architecture i386 && apt -y update && apt -y install bumblebee-nvidia primus primus-libs:i386
-# echo -en "\033[33m Please input you create username , It add to  bumblebee! :  \033[0m"
-# read username
-# echo -e "\033[33m UserName : $username \033[0m"
-# adduser $username bumblebee
-# IntelGraphics=$(lspci | grep "VGA" | grep "Intel" | cut -d' ' -f 1)
-# NvidiaGraphics=$(lspci | grep "VGA" | grep "NVIDIA" | cut -d' ' -f 1)
-# sed -i "/#   BusID \"PCI:01:00:0\"/a\BusID \"PCI:$IntelGraphics\"" /etc/bumblebee/xorg.conf.nouveau
-# sed -i "/#   BusID \"PCI:01:00:0\"/a\BusID \"PCI:$NvidiaGraphics\"" /etc/bumblebee/xorg.conf.nvidia
-# 然后在下一行中添加 xserver-xorg-video-nvidia , nvidia-xconfig
-# 看是这样
-apt -y install xserver-xorg-input-evdev xserver-xorg-input-kbd xserver-xorg-input-mouse \
-xserver-xorg-input-synaptics x11-xserver-utils x11-utils x11-xkb-utils \
-firmware-brcm80211 xserver-xorg-video-nvidia nvidia-xconfig # 其中 firmware-brcm80211 也是 BCM 无线网卡需要安装的驱动 , 如果你不是 BCM 无线网卡 , 请删掉它
-# 然后增加下面这条命令 , 便可执行脚本
-nvidia-xconfig
-# 理论上现在你可以按照上面的步骤进行安装该脚本了
 ```
 ## 截图
 ![Screenshots](Screenshots/2018-03-10-232235_1600x900_scrot.png)
