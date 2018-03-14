@@ -7,13 +7,15 @@
 #### 克隆该仓库到 HOME 目录
 ```sh
 cd ~
+su root
 apt update
 apt install git
 git clone https://github.com/LimoYuan/i3ForDebian9.git
+cd i3ForDebian9/Install
 su root
-bash i3ForDebian9/Install/000_install_sudo_bash-templetion.sh
+bash ./000_install_sudo_bash-templetion.sh
 su youCreateUsername
-bash i3ForDebian9/Install/001_install_driver_and_app.sh
+bash ./001_install_driver_and_app.sh
 ```
 #### 或者点击 [Download ZIP](https://github.com/LimoYuan/i3ForDebian9/archive/master.zip) , 下载到你的移动设备在tty下挂载后解压到 ~ 或者下载到手机中在同一局域网利用 ftp 软件然后 wget 到 ~ 目录
 ```sh
