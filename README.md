@@ -1,8 +1,9 @@
 # i3 For Debian9 Testing 备份
-------
+
 #### 新手 , 代码很烂 . 不过能跑(权当个人备份) ....
 #### i3ForUbuntu16.04 将会删除, 不再更新 .
 
+------
 ## 安装方式
 
 #### 最小化安装 Debian9 Testing , [官方NetBootNonFreeWeeklyISO镜像](https://cdimage.debian.org/cdimage/unofficial/non-free/cd-including-firmware/weekly-builds/amd64/iso-cd/)
@@ -184,7 +185,7 @@ sudo gdebi -n $workPath/gksudoPkg/gksu_2*.deb
 ### 关于 Shadowsocksr_Python 版 , 以及 Chrome SwitchOmega 使用说明
 
 - 安装成功后 , 用户家目录下 ssconfig 中包含了一个 ssr 的 config.json 的配置示例文件 , 可以添加你自己的节点信息保存后使用 MOD+F12 重启 SSR
-- 对于国内用户,没有 vpn 或者 路由器翻跃长城的情况下, i3ForDebian9 包含了 SwitchOmega , 请在 chrome 中打开 chrome://extensions , 打开开发者模式 . 将 SwitchyOmega_Chromium.crx 拖拽到 chrome 中修改配置即可 . 
+- 对于国内用户,没有 vpn 或者 路由器翻跃长城的情况下, i3ForDebian9 包含了 SwitchOmega , 请在 chrome 中打开 chrome://extensions , 打开开发者模式 . 将 SwitchyOmega_Chromium.crx 拖拽到 chrome 中修改配置即可 .
 
 -------
 ## 该脚本使用到的一些程序和文件来自 :
