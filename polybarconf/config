@@ -424,7 +424,7 @@ ramp-underline = #6D4C41
 ; 需要更新的软件包
 [module/packages]
 type = custom/script
-interval = 90
+interval = 1920
 format = <label>
 label = %output:0:50%
 exec = ~/.config/polybar/script/packages.sh
