@@ -73,7 +73,7 @@ font-5 = siji:pixelsize=14;2
 ;顶部Bar模块显示布局
 modules-left = i3
 modules-center = date
-modules-right = wlan networkspeedup networkspeeddown backlight volume battery powermenu
+modules-right = wlan networkspeedup networkspeeddown backlight volume battery packages powermenu
 
 ;底部Bar
 [bar/bottom]
@@ -126,7 +126,7 @@ font-5 = siji:pixelsize=14;2
 
 ;底部Bar模块显示布局
 modules-left = mpd xwindow
-modules-center =
+modules-center =  
 modules-right = xkeyboard temperature filesystem-slash filesystem-home cpu memory
 
 ;程序运行Bar
@@ -337,7 +337,7 @@ interface = wlp2s0
 interval = 1
 label-connected = "%upspeed:7%"
 format-connected = <label-connected>
-format-connected-prefix = ""
+format-connected-prefix = 
 format-connected-prefix-foreground = 	#B0E0E6
 ;下行
 [module/networkspeeddown]
@@ -346,7 +346,7 @@ interval = 1
 interface = wlp2s0
 label-connected = "%downspeed:7%"
 format-connected = <label-connected>
-format-connected-prefix = ""
+format-connected-prefix = " " 
 format-connected-prefix-foreground = #B0E0E6
 
 ;日期,时间
@@ -421,9 +421,17 @@ ramp-2 = 
 ramp-foreground = #6D4C41
 ramp-underline = #6D4C41
 
+; 需要更新的软件包
+[module/packages]
+type = custom/script
+interval = 90
+format = <label>
+label = %output:0:50%
+exec = ~/.config/polybar/script/packages.sh
+
 ;自定义电源按钮
 [module/powermenu]
 type = custom/menu
-label-open = "%{A1:~/.config/i3/rofi_powermenu.sh:}%{A}"
+label-open = "%{A1:~/.config/i3/rofi_powermenu.sh:}%{A}"
 label-open-foreground = #ff5c56
 ; vim:ft=dosini

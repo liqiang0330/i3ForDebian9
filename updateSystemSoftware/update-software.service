@@ -1,0 +1,6 @@
+[Unit]
+Description=Check for System SoftWare update
+ 
+[Service]
+Type=simple
+ExecStart=/home/limo/.config/polybar/script/updateSoftWareAndSystem.sh

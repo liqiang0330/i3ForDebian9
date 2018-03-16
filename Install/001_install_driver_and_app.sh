@@ -63,7 +63,7 @@ function installApplications() {
       breeze-cursor-theme file-roller pulseaudio-module-bluetooth \
       blueman rofi xbindkeys zsh-syntax-highlighting scrot \
       imagemagick zathura* tk parcellite network-manager network-manager-gnome \
-      mesa* gpick menulibre
+      mesa* gpick menulibre aptitude
   commandSuccess $? "Base applications Installation "
 }
 
@@ -396,10 +396,15 @@ function someConfigure() {
   # mv $HOME/.config/i3/config $HOME/.config/i3/config.bak
   cp -rf $workPath/i3config/* $HOME/.config/i3/
   # 给 i3 第一个工作区分配显示器
-#  DIS_MONITOR=$(xrandr | grep "connected primary [0-9]" | cut -d' ' -f 1)
-#  sed -i "/# workspace \$tag1 output LVDS-1/iworkspace \$tag1 output $DIS_MONITOR" $HOME/.config/i3/config
+  # DIS_MONITOR=$(xrandr | grep "connected primary [0-9]" | cut -d' ' -f 1)
+  # sed -i "/# workspace \$tag1 output LVDS-1/iworkspace \$tag1 output $DIS_MONITOR" $HOME/.config/i3/config
   # 添加并配置 Polybar 配置文件
   cp -rf $workPath/polybarconf/* $HOME/.config/polybar/
+  # 添加当前用户名到 $HOME/.config/polybar/script/updateSoftWareAndSystem.sh
+  sed -i "s/    userHome=limo/    userHome=$USER/g" $HOME/.config/polybar/script/updateSoftWareAndSystem.sh
+  # 移动文件并设置开机自动启动更新软件包计时器
+  sudo cp -rf $workPath/updateSystemSoftware/update-software.* /etc/systemd/system/
+  sudo systemctl enable update-software.timer
   # qt4 配置文件
   cp -rf $workPath/qt4Config/* $HOME/.config
   # 添加并配置 GTK 主题配置

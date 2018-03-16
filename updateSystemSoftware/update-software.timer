@@ -1,0 +1,9 @@
+[Unit]
+Description=Check for System SoftWare specified time
+ 
+[Timer]
+OnBootSec=1min
+OnUnitActiveSec=30min
+
+[Install]
+WantedBy=multi-user.target
