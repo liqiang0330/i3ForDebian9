@@ -1,8 +1,9 @@
-# i3 For Debian9 Testing 备份
-
-#### 新手 , 代码很烂 . 不过能跑(权当个人备份) ....
-#### i3ForUbuntu16.04 将会删除, 不再更新 .
-
+# i3 For Debian9 Testing/Buster 个人备份
+------
+##### 新手 , 代码很烂 . 不过能跑(权当个人备份) ....
+##### i3ForUbuntu16.04 已经删除, 不再更新 .
+#### 由于考虑到网络的原因 , 把很多需要 git clone 的东西全部换为本地安装 , 这可能会造成一些软件没有上游新 , 可以参考下面列出的项目进行手动升级如果需要的情况下.
+#### 一些软件是编译安装 , 如 ： i3-Gaps , polybar , YCM , proxychains-ng . 故会花费更多的时间 . 具体取决于你机器的配置 . 
 ------
 ## 安装方式
 
@@ -14,6 +15,7 @@ cd ~
 su root
 apt update
 apt install git
+su youCreateUsername
 git clone https://github.com/LimoYuan/i3ForDebian9.git
 cd i3ForDebian9/Install
 su root
@@ -201,4 +203,5 @@ sudo gdebi -n $workPath/gksudoPkg/gksu_2*.deb
 #### [Proxychains-ng](https://github.com/rofl0r/proxychains-ng)
 #### [Oh-My-Zsh](https://github.com/robbyrussell/oh-my-zsh)
 #### [VimPlus](https://github.com/chxuan/vimplus)
+#### [参考自这位 eoli3n 老哥的配置](https://github.com/eoli3n/dotfiles)
 #### 诚谢以上项目 . 可能还有其他没有列出 . 之后再添加
